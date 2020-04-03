@@ -1,0 +1,20 @@
+<div class="container">
+    <nav>
+        <span class="nav__item" [routerLink]="['/']">Home</span>
+    </nav>
+    <div class="articles">
+        <div class="article article--first">
+            <header class="article__header">{{firstHeader}}</header>
+            <div class="article__content">{{firstContent}}</div>
+        </div>
+        <div class="article article--second">
+            <header class="article__header">{{secondHeader}}</header>
+            <div class="article__content">{{secondContent}}</div>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="contact__header">{{contactFirstHeader}}</div>
+        <div class="contact__header">{{contactSecondHeader}}</div>
+        <div class="contact__email">{{contactEmail}}</div>
+    </div>
+</div>

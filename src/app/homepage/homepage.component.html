@@ -1,0 +1,15 @@
+<div class="container">
+    <nav>
+        <span [routerLink]="['/about']" class="navigation__item">About us</span>
+        <span class="navigation__item" (click)="showLoginForm()">Login</span>
+        <span class="navigation__item" (click)="showRegisterForm()">Register</span>
+    </nav>
+    <div class="content">
+        <div class="content__wrapper">
+            <header class="content__header">{{name}}</header>
+            <div class="content__description">{{subName}}</div>
+        </div>
+    </div>
+    <app-login *ngIf="loginFormVisible" (setHidden)="showLoginForm(false)"></app-login>
+    <app-register *ngIf="registerFormVisible" (setHidden)="showRegisterForm(false)"></app-register>
+</div>

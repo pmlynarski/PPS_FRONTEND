@@ -1,0 +1,50 @@
+<div class="confirmation confirmation--hidden">
+    <div class="confirmation__text">Are you sure that you want to join <span class="text--strong">{{group.name}}</span>?
+    </div>
+    <div class="confirmation__buttons">
+        <button class="button--green" (click)="joinGroup()">Yes</button>
+        <button class="button--red cancell" (click)="showConfirmation(false)">No</button>
+    </div>
+</div>
+<div class="container">
+    <div class="header">
+        <div class="button__wrapper">
+            <button class="button--green" (click)="showConfirmation()">
+                Join
+            </button>
+        </div>
+    </div>
+    <div class="group__content">
+        <div class="group__info">
+            <div class="group__name">
+                <span class="name__label text--strong">
+                Name: 
+            </span>
+                <span class="name__value">
+                {{group.name}}
+            </span>
+            </div>
+            <div class="group__owner">
+                <span class="owner__label text--strong">
+                Owner: 
+            </span>
+                <span class="owner__value">
+                {{group.owner.first_name}} {{group.owner.last_name}}
+            </span>
+            </div>
+            <div class="group__members">
+                <span class="members__label text--strong">
+                Members: 
+            </span>
+                <span class="members__value">
+                {{group.members_count}}
+            </span>
+            </div>
+        </div>
+        <div class="info">
+            <span class="message--error">
+                {{group.info}}
+            </span>
+        </div>
+    </div>
+</div>

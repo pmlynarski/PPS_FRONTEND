@@ -1,0 +1,76 @@
+<div class="box">
+    <button class="box__leave" (click)="this.setHidden.emit()"><span></span></button>
+    <div class="box__header">
+        <span>Register</span>
+    </div>
+    <form class="register__form" [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+        <input class="input--first-name" type="text" formControlName="firstName" placeholder="First name" />
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="first-name--error message--error">
+
+            <div *ngIf="firstName.errors.required">
+                First name is required.
+            </div>
+            <div *ngIf="firstName.errors.minlength">
+                First name must be at least 4 characters long.
+            </div>
+        </div>
+        <input class="input--last-name" type="text" formControlName="lastName" placeholder="Last name" />
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="last-name--error message--error">
+
+            <div *ngIf="lastName.errors.required">
+                Last name is required
+            </div>
+            <div *ngIf="lastName.errors.minlength">
+                Last name must be at least 4 characters long
+            </div>
+        </div>
+        <input class="input--email" formControlName="email" type="text" placeholder="Email" />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email--error message--error">
+
+            <div *ngIf="email.errors.required">
+                Email is required.
+            </div>
+            <div *ngIf="email.errors.email">
+                Provide valid email address
+            </div>
+        </div>
+        <div *ngIf="userExists">
+            This email is already taken
+        </div>
+        <input class="input--password" formControlName="password" type="password" placeholder="Password" />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="password--error message--error">
+
+            <div *ngIf="password.errors.required">
+                Password is required.
+            </div>
+            <div *ngIf="password.errors.minlength">
+                Password must be at least 8 characters long.
+            </div>
+            <div *ngIf="password.errors.pattern">
+                Working password conditions:
+                <ul>
+                    <li>At least 8 characters in length</li>
+                    <li>Lowercase letters</li>
+                    <li>Uppercase letters</li>
+                    <li>Numbers Special characters</li>
+                </ul>
+            </div>
+        </div>
+        <input class="input--repeat-password" formControlName="repeatPassword" type="password" placeholder="Repeat password" />
+        <div *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)" class="repeat-password--error message--error">
+
+            <div *ngIf="repeatPassword.errors.required">
+                Repeating password is required.
+            </div>
+            <div *ngIf="!repeatPassword.validateAreEqual">
+                Passwords are not the same.
+            </div>
+        </div>
+        <select formControlName="role" class="form-control">
+                <option *ngFor="let option of roleOptions" [selected]="option === 'Student'">
+                        {{ option }}
+                </option>
+                </select>
+        <button class="button--neutral" type="submit" [disabled]="!registerForm.valid">Register</button>
+    </form>
+</div>

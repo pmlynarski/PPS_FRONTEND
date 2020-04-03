@@ -1,0 +1,68 @@
+.container {
+    display: grid;
+    grid-template-rows: 8vh 8vh min-content;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas: ". header ." ". sub-header ." ". credentials .";
+}
+
+.header {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sub-header {
+    grid-area: sub-header;
+}
+
+.profile__wrapper {
+    grid-area: credentials;
+}
+
+.profile__first-name,
+.profile__last-name,
+.profile__email {
+    margin: 15px 0 15px 0;
+}
+
+.first-name__wrapper,
+.last-name__wrapper,
+.email__wrapper {
+    display: inline;
+}
+
+.profile__input {
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 5px;
+    height: 30px;
+}
+
+.profile__button {
+    height: 30px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.edit__wrapper {
+    display: inline-block;
+    padding: 5px 0 5px 0;
+}
+
+.password__input,
+.repeat-password__input {
+    margin: 5px 0 5px 0;
+}
+
+.password__input {
+    display: block;
+}
+
+.repeat-password__input {
+    display: inline-block;
+}

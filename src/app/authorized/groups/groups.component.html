@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="header">
+        Your groups
+    </div>
+    <div class="errors" *ngIf="!groupsExist">
+        <div class="errors__error message--error" *ngFor="let error of errors">
+            {{error}}
+        </div>
+    </div>
+    <div class="group__add">
+        <button class="button--green add__button">Create group!</button>
+    </div>
+    <div class="groups">
+        <div *ngFor="let group of groups" class="groups_group" [routerLink]="['/home/group', group.id]">
+            <div class="group__name">
+                <span class="name__label text--strong">Name: </span>{{group.name}}
+            </div>
+            <div class="group__owner">
+                <span class="owner__label text--strong">Owner: </span>{{group.owner.first_name}} {{group.owner.last_name}}
+            </div>
+            <div class="group__members-count">
+                <span class="members__label text--strong">Members: </span>{{group.members_count}}
+            </div>
+        </div>
+    </div>
+</div>

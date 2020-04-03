@@ -1,0 +1,32 @@
+<button (click)="changeHamburgerState()" class="hamburger">
+    <span class="hamburger__wrapper">
+        <span class="hamburger__inner"></span>
+    </span> 
+</button>
+<nav class="nav">
+    <div class="nav__item nav__item--home">
+        <span (click)="navigateToPosts()">
+             Home
+            </span>
+    </div>
+    <div class="nav__item nav__item--groups">
+        <span (click)="navigateToGroups()">
+            Groups
+        </span>
+    </div>
+    <div class="nav__item nav__item--search">
+        <span (click)="navigateToSearch()">
+             Search
+            </span>
+    </div>
+    <div class="nav__item nav__item--profile">
+        <span (click)="navigateToProfile()">
+            Profile
+        </span>
+    </div>
+    <div class="nav__item nav__item--logout">
+        <span (click)="logout()">
+             Logout
+            </span>
+    </div>
+</nav>
