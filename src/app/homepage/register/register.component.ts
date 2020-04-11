@@ -20,9 +20,9 @@ export class RegisterComponent {
   private message: string;
 
   constructor(public registerService: RegisterService) {
+    this.regExp = configData.passwordRegEx;
     this.setHidden = new EventEmitter<boolean>();
     this.showRegisterInfo = new EventEmitter<boolean>();
-    this.regExp = configData.passwordRegEx;
     this.registerForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(4)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(4)]),

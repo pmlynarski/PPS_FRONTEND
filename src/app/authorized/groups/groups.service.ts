@@ -1,14 +1,25 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { default as urlData } from 'src/app/core/config';
+import { IGroupFull } from '../../core/interfaces/groups.interfaces';
 
 @Injectable()
 export class GroupsService {
-  myPostsUrl = urlData.host + 'groups/my_groups/?page=1';
+  private readonly myPostsUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.myPostsUrl = urlData.host + 'groups/my_groups/?page=1';
+  }
 
-  getUsersGroups() {
-    return this.http.get(this.myPostsUrl, { observe: 'response' });
+  getUsersGroups(): Observable<object> {
+    return this.http.get(this.myPostsUrl).pipe(
+      map((response: any) => ({
+        ...response,
+        results: [...response.results].map((element): IGroupFull => ({ ...element, membersCount: element.members.length })),
+      })),
+    );
   }
 }

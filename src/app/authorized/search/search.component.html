@@ -1,24 +1,22 @@
 <div class="container">
-    <div class="header">Search for groups</div>
-    <div class="search__wrapper">
-        <input class="search__field" (keyup.enter)="search()" [(ngModel)]="value"><button class="search__button" (click)="search()">Search!</button>
+  <div class="header">Search for groups</div>
+  <div class="search__wrapper">
+    <input class="search__field" (keyup.enter)="search()" [(ngModel)]="value" /><button class="search__button" (click)="search()">
+      Search!
+    </button>
+  </div>
+  <div class="errors">
+    <div class="errors__error message--error" *ngIf="message">
+      {{ message }}
     </div>
-    <div class="errors">
-        <div class="errors__error message--error" *ngFor="let error of errors">
-            {{error}}
-        </div>
+  </div>
+  <div class="results">
+    <div class="results__result" *ngFor="let group of results" [routerLink]="['/home/group/foreign', group.id]">
+      <div class="group__name"><span class="name__label text--strong">Name: </span>{{ group.name }}</div>
+      <div class="group__owner">
+        <span class="owner__label text--strong">Owner: </span>{{ group.owner.first_name }} {{ group.owner.last_name }}
+      </div>
+      <div class="group__members-count"><span class="members__label text--strong">Members: </span>{{ group.membersCount }}</div>
     </div>
-    <div class="results">
-        <div class="results__result" *ngFor="let group of results" [routerLink]="['/home/group/foreign', group.id]">
-            <div class="group__name">
-                <span class="name__label text--strong">Name: </span>{{group.name}}
-            </div>
-            <div class="group__owner">
-                <span class="owner__label text--strong">Owner: </span>{{group.owner.first_name}} {{group.owner.last_name}}
-            </div>
-            <div class="group__members-count">
-                <span class="members__label text--strong">Members: </span>{{group.members_count}}
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

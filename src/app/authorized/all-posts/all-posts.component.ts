@@ -1,4 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+
+import { IPost } from '../../core/interfaces/posts.interfaces';
 import { AllPostsService } from './all_posts.service';
 
 @Component({
@@ -6,45 +8,35 @@ import { AllPostsService } from './all_posts.service';
   templateUrl: './all-posts.component.html',
   styleUrls: ['./all-posts.component.css'],
 })
-export class AllPostsComponent implements OnInit {
-  response;
-  posts;
-  nextUrl;
-  postsExist = true;
-  errors = [];
+export class AllPostsComponent {
+  private posts: IPost[];
+  private nextUrl: string;
+  private message: string;
 
   constructor(private allPostsService: AllPostsService) {
     this.allPostsService.getUsersPosts().subscribe(
-      (response) => {
-        this.response = response.body;
-        this.posts = this.response.results;
-        this.nextUrl = this.response.next;
+      (response: any) => {
+        this.message = undefined;
+        this.posts = [...response.results];
+        this.nextUrl = response.next;
       },
       (error) => {
-        this.postsExist = false;
-        this.errors.push(error.error.message);
+        this.message = error.error.message;
       },
     );
   }
 
-  ngOnInit() {}
-
   @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      if (this.nextUrl !== 'null') {
+      if (this.nextUrl !== null) {
         this.allPostsService.getFurtherPosts(this.nextUrl).subscribe(
-          (response) => {
-            let body;
-            if (response.status === 200) {
-              body = response.body;
-              this.posts = this.posts.concat(body.results);
-              this.nextUrl = body.next;
-            }
+          (res: any) => {
+            this.posts = [...this.posts, res.results];
+            this.nextUrl = res.next;
+            this.message = undefined;
           },
           (error) => {
-            if (error.status === 406) {
-              this.errors.push(error.error.message);
-            }
+            this.message = error.message;
           },
         );
       }

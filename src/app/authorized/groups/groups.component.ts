@@ -1,31 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IGroupFull } from '../../core/interfaces/groups.interfaces';
 import { GroupsService } from './groups.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.css'],
 })
-export class GroupsComponent implements OnInit {
-  groupsExist = true;
-  response;
-  groups;
-  errors = [];
+export class GroupsComponent {
+  private message: string;
+  private groups: IGroupFull[];
 
-  constructor(private groupsService: GroupsService) {}
-
-  ngOnInit() {
+  constructor(private groupsService: GroupsService) {
     this.groupsService.getUsersGroups().subscribe(
-      (response) => {
-        if (response.status === 200) {
-          this.response = response.body;
-          this.groups = this.response.results;
-        }
+      (response: any) => {
+        this.message = undefined;
+        this.groups = response.results;
       },
       (error) => {
-        this.groupsExist = false;
-        this.errors.push(error.error.message);
+        this.message = error.error.message;
       },
     );
   }

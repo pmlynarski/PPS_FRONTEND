@@ -1,26 +1,25 @@
 <div class="container">
-    <div class="header">
-        Posts in your groups.
+  <div class="header">
+    Posts in your groups.
+  </div>
+  <div class="errors" *ngIf="message">
+    <div class="errors__error message--error">
+      {{ message }}
     </div>
-    <div class="errors" *ngIf="!postsExist">
-        <div class="errors__error message--error" *ngFor="let error of errors">
-            {{error}}
+  </div>
+  <div class="posts">
+    <div *ngFor="let post of posts" class="posts__post">
+      <div class="post__header">
+        <div class="post__credentials">
+          <span class="post__author">{{ post.owner.first_name }} {{ post.owner.last_name }} </span>
+          <div class="triangle"></div>
+          <span class="post__group"> {{ post.group.name }}</span>
         </div>
+        <div class="post__date">{{ post.date_posted }}</div>
+      </div>
+      <div class="post__content">
+        {{ post.content }}
+      </div>
     </div>
-    <div class="posts">
-        <div *ngFor="let post of posts" class="posts__post">
-            <div class="post__header">
-                <div class="post__credentials">
-                    <span class="post__author">{{post.owner.first_name}} {{post.owner.last_name}}
-                    </span>
-                    <div class="triangle"></div>
-                    <span class="post__group"> {{post.group.name}}</span>
-                </div>
-                <div class="post__date">{{post.date_posted}}</div>
-            </div>
-            <div class="post__content">
-                {{post.content}}
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

@@ -17,11 +17,11 @@ export class LoginComponent {
   private message: string;
 
   constructor(private loginService: LoginService, private router: Router) {
+    this.setHidden = new EventEmitter<boolean>();
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
-    this.setHidden = new EventEmitter<boolean>();
   }
 
   get email(): AbstractControl {

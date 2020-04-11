@@ -1,16 +1,37 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { default as urlData } from 'src/app/core/config';
-import { first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { default as urlData } from '../../core/config';
 
 @Injectable()
 export class AllPostsService {
-    myPostsUrl = urlData.host + 'posts/my_posts/?page=1';
-    constructor(private http: HttpClient) { }
-    getUsersPosts() {
-        return this.http.post(this.myPostsUrl, {}, { observe: 'response' });
-    }
-    getFurtherPosts(url: string) {
-        return this.http.post(url, {}, { observe: 'response' });
-    }
+  private myPostsUrl: string;
+
+  constructor(private http: HttpClient) {
+    this.myPostsUrl = urlData.host + 'posts/my_posts/?page=1';
+  }
+
+  getUsersPosts(): Observable<HttpResponse<any>> {
+    return this.http.post(this.myPostsUrl, {}).pipe(
+      map((res: any) => {
+        return {
+          ...res,
+          results: [...res.results].map((element) => ({ ...element, date_posted: new Date(element.date_posted).toLocaleString() })),
+        };
+      }),
+    );
+  }
+
+  getFurtherPosts(url: string): Observable<HttpResponse<any>> {
+    return this.http.post(url, {}).pipe(
+      map((res: any) => {
+        return {
+          ...res,
+          results: [...res.results].map((element) => ({ ...element, date_posted: new Date(element.date_posted).toLocaleString() })),
+        };
+      }),
+    );
+  }
 }

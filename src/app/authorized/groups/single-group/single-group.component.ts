@@ -1,8 +1,11 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+
+import { IGroupFull } from '../../../core/interfaces/groups.interfaces';
+import { IPost } from '../../../core/interfaces/posts.interfaces';
 import { SingleGroupService } from './single-group.service';
 
 @Component({
@@ -11,21 +14,13 @@ import { SingleGroupService } from './single-group.service';
   styleUrls: ['./single-group.component.css'],
 })
 export class SingleGroupComponent implements OnInit {
-  postsErrors = [];
-  posts = [];
-  newPostContent = '';
-  group: any = {
-    name: '',
-    members: '',
-    owner: {
-      first_name: '',
-      last_name: '',
-    },
-  };
-  groupId;
-  responseBody;
-  isGroupOwner = false;
-  postForm: FormGroup;
+  private message: string;
+  private posts: IPost[];
+  private group: IGroupFull;
+  private groupId: number;
+  private isGroupOwner: boolean;
+  private postForm: FormGroup;
+  private nextUrl: string;
 
   constructor(
     private singleGroupService: SingleGroupService,
@@ -33,52 +28,46 @@ export class SingleGroupComponent implements OnInit {
     private elRef: ElementRef,
     private router: Router,
   ) {
+    this.isGroupOwner = false;
     this.postForm = new FormGroup({
       content: new FormControl('', Validators.required),
     });
-  }
-
-  ngOnInit() {
-    this.groupId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.groupId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.singleGroupService.getGroupData(this.groupId).subscribe(
       (response) => {
-        if (response.status === 200) {
-          this.group = response.body;
-          this.group.members = this.group.members.length;
-        }
+        this.group = response;
       },
-      (error) => {
-        throwError(error);
+      () => {
+        this.router.navigate(['/home/groups']);
       },
     );
     this.singleGroupService.getGroupPosts(this.groupId).subscribe(
       (response) => {
-        if (response.status === 200) {
-          this.responseBody = response.body;
-          this.posts = this.responseBody.results;
-          this.posts = this.posts.map((element) => ({ ...element, date_posted: new Date(element.date_posted).toLocaleString() }));
-        }
+        this.posts = [...response.results];
+        this.nextUrl = response.next;
       },
       (error) => {
-        this.postsErrors.push(error.message);
-        throwError(error);
+        console.log(error);
+        this.message = error.message;
       },
     );
     this.singleGroupService.isGroupOwner(this.groupId).subscribe(
-      (response) => {
+      () => {
         this.isGroupOwner = true;
       },
-      (error) => {
+      () => {
         this.isGroupOwner = false;
       },
     );
   }
 
+  ngOnInit(): void {}
+
   get content() {
     return this.postForm.get('content');
   }
 
-  addPost = () => {
+  addPost = (): void => {
     this.singleGroupService
       .addPost(this.groupId, { content: this.content.value })
       .pipe(
@@ -87,8 +76,8 @@ export class SingleGroupComponent implements OnInit {
         }),
       )
       .subscribe(
-        (response) => {
-          this.ngOnInit();
+        (post: any) => {
+          this.posts.unshift(post);
         },
         (error) => {
           throwError(error);
@@ -97,9 +86,9 @@ export class SingleGroupComponent implements OnInit {
   };
 
   leaveGroup = (id: number) => {
-    this.showConfirmation(false);
+    this.showConfirmation();
     this.singleGroupService.leaveGroup(id).subscribe(
-      (response) => {
+      () => {
         this.router.navigate(['/home/groups']);
       },
       (error) => {
@@ -107,15 +96,29 @@ export class SingleGroupComponent implements OnInit {
       },
     );
   };
-  showConfirmation = (value: boolean = true) => {
+
+  showConfirmation = (): void => {
     const box = this.elRef.nativeElement.querySelector('.confirmation');
     box.classList.toggle('confirmation--hidden');
   };
 
-  deleteGroup(id) {
-    this.singleGroupService.deleteGroup(id).subscribe((res) => {
-      this.showConfirmation(false);
+  deleteGroup(id: number): void {
+    this.singleGroupService.deleteGroup(id).subscribe(() => {
+      this.showConfirmation();
       this.router.navigate(['/home/groups']);
     });
+  }
+
+  @HostListener('window:scroll', ['$event']) onScrollEvent($event): void {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (this.nextUrl !== null) {
+        this.singleGroupService.getFurtherGroupPosts(this.nextUrl).subscribe(
+          (response: any) => {
+            this.posts = [...this.posts, response.results];
+          },
+          (error) => console.log(error),
+        );
+      }
+    }
   }
 }

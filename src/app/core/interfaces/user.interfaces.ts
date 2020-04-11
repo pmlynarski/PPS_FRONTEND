@@ -9,3 +9,9 @@ export interface IRegisterData {
   first_name: string;
   last_name: string;
 }
+
+export interface IUserData {
+  email: string;
+  first_name: string;
+  last_name: string;
+}

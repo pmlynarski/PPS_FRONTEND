@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
 
 import { default as urlData } from 'src/app/core/config';
 import { IRegisterData } from '../../core/interfaces/user.interfaces';
@@ -12,7 +11,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(data: IRegisterData): Observable<any> {
-    return this.http.post(this.registerUrl, data).pipe(first());
+  registerUser(data: IRegisterData): Observable<object> {
+    return this.http.post(this.registerUrl, data);
   }
 }

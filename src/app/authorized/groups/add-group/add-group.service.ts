@@ -1,12 +1,18 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { default as urlData } from 'src/app/core/config';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AddGroupService {
-  url = urlData.host + 'groups/create/';
-  constructor(private http: HttpClient) { }
-  addGroup = (data) => this.http.post(this.url, data, {observe: 'response'})
+  private readonly url: string;
+
+  constructor(private http: HttpClient) {
+    this.url = urlData.host + 'groups/create/';
+  }
+
+  addGroup = (data): Observable<HttpResponse<any>> => this.http.post(this.url, data, { observe: 'response' });
 }

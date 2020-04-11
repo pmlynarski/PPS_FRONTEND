@@ -16,10 +16,10 @@ export class LoginService {
     this.TOKEN = 'Token';
   }
 
-  login(data: ILoginData): Observable<any> {
-    return this.http.post<any>(this.loginUrl, data).pipe(
-      tap((response: HttpResponse<any>) => {
-        this.doLoginUser(response.body.token);
+  login(data: ILoginData): Observable<HttpResponse<any>>  {
+    return this.http.post(this.loginUrl, data).pipe(
+      tap((response: any) => {
+        this.doLoginUser(response.token);
       }),
     );
   }

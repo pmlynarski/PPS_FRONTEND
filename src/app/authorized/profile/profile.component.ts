@@ -1,96 +1,115 @@
-import { Component, OnInit } from '@angular/core';
-import { ProfileService } from './profile.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { default as configData } from 'src/app/core/config.js';
+import { Component } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';
 
+import { default as configData } from 'src/app/core/config.js';
+import { IUserData } from '../../core/interfaces/user.interfaces';
+import { equalityValidator } from '../../homepage/register/equality.validator';
+import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
+  private user: IUserData;
+  private resultMessage: string;
+  private firstNameField: boolean;
+  private lastNameField: boolean;
+  private emailField: boolean;
+  private passwordChange: boolean;
+  private changePasswordForm: FormGroup;
+  private readonly regExp: string;
 
-  constructor(private profileService: ProfileService) { }
-  rendered: boolean;
-  data;
-  user;
-  resultMessage = '';
-  firstNameField = false;
-  lastNameField = false;
-  emailField = false;
-  passwordChange = false;
-  changePasswordForm;
-  regExp = configData.passwordRegEx;
-  ngOnInit() {
-    this.profileService.getUsersCredentials().subscribe(response => {
-      if (response.status === 200) {
-        this.rendered = true;
-        this.user = response.body;
-      }
+  constructor(private profileService: ProfileService) {
+    this.regExp = configData.passwordRegEx;
+    this.getUserCredentials();
+    this.changePasswordForm = new FormGroup({
+      password: new FormControl('', [Validators.required, Validators.pattern(this.regExp), Validators.minLength(8)]),
+      repeatPassword: new FormControl('', [Validators.required, equalityValidator('password')]),
     });
-    this.changePasswordForm = new FormGroup({});
-    this.changePasswordForm.addControl('password', new FormControl('',
-      [Validators.required, Validators.pattern(this.regExp), Validators.minLength(8)]));
-    this.changePasswordForm.addControl('repeatPassword', new FormControl('',
-      [Validators.required, this.validateAreEqual.bind(this)]));
+    this.firstNameField = false;
+    this.lastNameField = false;
+    this.emailField = false;
+    this.passwordChange = false;
   }
-  private validateAreEqual(fieldControl: FormControl) {
-    return fieldControl.value === this.changePasswordForm.get('password').value ? null : {
-      NotEqual: true
-    };
-  }
-  get password() {
+
+  get password(): AbstractControl {
     return this.changePasswordForm.get('password');
   }
-  get repeatPassword() {
+
+  get repeatPassword(): AbstractControl {
     return this.changePasswordForm.get('repeatPassword');
   }
-  editFirstName = () => {
+
+  getUserCredentials(): void {
+    this.profileService.getUsersCredentials().subscribe((response) => {
+      this.user = response;
+    });
+  }
+
+  editFirstName(): void {
     this.firstNameField = !this.firstNameField;
   }
-  sendFirstName = () => {
+
+  sendFirstName(): void {
     this.editFirstName();
-    this.profileService.sendUserData({ first_name: this.user.first_name }).subscribe(response => {
-      this.ngOnInit();
-    }, error => {
-      this.resultMessage = 'Something is wrong!';
-    });
+    this.profileService.sendUserData({ first_name: this.user.first_name }).subscribe(
+      () => {
+        this.getUserCredentials();
+      },
+      () => {
+        this.resultMessage = 'Something is wrong!';
+      },
+    );
   }
-  editLastName = () => {
+
+  editLastName(): void {
     this.lastNameField = !this.lastNameField;
   }
-  sendLastName = () => {
+
+  sendLastName(): void {
     this.editLastName();
-    this.profileService.sendUserData({ last_name: this.user.last_name }).subscribe(response => {
-      this.ngOnInit();
-    }, error => {
-      this.resultMessage = 'Something is wrong!';
-    });
+    this.profileService.sendUserData({ last_name: this.user.last_name }).subscribe(
+      () => {
+        this.getUserCredentials();
+      },
+      () => {
+        this.resultMessage = 'Something is wrong!';
+      },
+    );
   }
-  editEmail = () => {
+
+  editEmail(): void {
     this.emailField = !this.emailField;
   }
-  sendEmail = () => {
+
+  sendEmail(): void {
     this.editEmail();
-    this.profileService.sendUserData({ email: this.user.email }).subscribe(response => {
-      this.ngOnInit();
-    }, error => {
-      if (error.status === 406) {
+    this.profileService.sendUserData({ email: this.user.email }).subscribe(
+      () => {
+        this.getUserCredentials();
+      },
+      () => {
         this.resultMessage = 'This email is already taken';
-      } else {
-        this.resultMessage = 'Something is wrong!';
-      }
-    });
+      },
+    );
   }
-  passwordFormReveal = (value = true) => { this.passwordChange = value; };
-  submitPassword = () => {
+
+  passwordFormReveal(value = true): void {
+    this.passwordChange = value;
+  }
+
+  submitPassword(): void {
     this.passwordFormReveal(false);
-    this.profileService.sendUserData({ password: this.password.value }).subscribe(response => {
-      this.ngOnInit();
-    }, error => {
-      throwError(error);
-    });
+    this.profileService.sendUserData({ password: this.password.value }).subscribe(
+      () => {
+        this.getUserCredentials();
+      },
+      (error) => {
+        throwError(error);
+      },
+    );
   }
 }
