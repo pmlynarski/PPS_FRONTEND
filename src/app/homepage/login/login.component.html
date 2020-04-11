@@ -1,17 +1,21 @@
 <div class="box">
-    <button class="box__leave" (click)="this.setHidden.emit()"><span></span></button>
-    <div class="box__header">
-        <span>Log in</span>
+  <button class="box__leave" (click)="this.setHidden.emit()"><span></span></button>
+  <div class="box__header">
+    <span>Log in</span>
+  </div>
+  <form class="login__form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+    <label>
+      <input class="input--email" formControlName="email" type="text" placeholder="Email" />
+    </label>
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email--error message--error">
+      Please provide correct email
     </div>
-    <form class="login__form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
-        <input class="input--email" formControlName="email" type="text" placeholder="Email" />
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email--error message--error">
-            Please provide correct email
-        </div>
-        <input class="input--password" formControlName="password" type="password" placeholder="Password" />
-        <div *ngIf="wrongCredentials" class="message--error password--error">
-            Wrond credentials provided
-        </div>
-        <button class="button--neutral" type="submit">Login</button>
-    </form>
+    <label>
+      <input class="input--password" formControlName="password" type="password" placeholder="Password" />
+    </label>
+    <div *ngIf="message" class="message--error password--error">
+      {{ message }}
+    </div>
+    <button class="button--neutral" type="submit">Login</button>
+  </form>
 </div>

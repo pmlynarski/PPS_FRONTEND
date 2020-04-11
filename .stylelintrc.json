@@ -1,0 +1,9 @@
+{
+  "plugins": ["stylelint-selector-bem-pattern", "stylelint-order"],
+  "rules": {
+    "selector-class-pattern": null,
+    "order/order": ["custom-properties", "declarations"],
+    "order/properties-alphabetical-order": true,
+    "max-nesting-depth": 3
+  }
+}

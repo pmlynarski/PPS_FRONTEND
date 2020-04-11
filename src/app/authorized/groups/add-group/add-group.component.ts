@@ -6,28 +6,25 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-group',
   templateUrl: './add-group.component.html',
-  styleUrls: ['./add-group.component.css']
+  styleUrls: ['./add-group.component.css'],
 })
 export class AddGroupComponent implements OnInit {
-
   addGroupForm;
-  constructor(private addGroupService: AddGroupService, private router: Router) { }
+  constructor(private addGroupService: AddGroupService, private router: Router) {}
 
   ngOnInit() {
     this.addGroupForm = new FormGroup({});
     this.addGroupForm.addControl('groupName', new FormControl('', [Validators.required]));
   }
-  get groupName(){
+  get groupName() {
     return this.addGroupForm.get('groupName');
   }
   addGroup = () => {
-    console.log(this.groupName.value);
-    this.addGroupService.addGroup({name: this.groupName.value}).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['/home/groups']);
-    }, error => {
-      console.log(error);
-    })
-  }
-
+    this.addGroupService.addGroup({ name: this.groupName.value }).subscribe(
+      (response) => {
+        this.router.navigate(['/home/groups']);
+      },
+      (error) => {},
+    );
+  };
 }

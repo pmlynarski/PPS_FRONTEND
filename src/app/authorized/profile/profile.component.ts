@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { default as configData } from 'src/app/config.js';
+import { default as configData } from 'src/app/core/config.js';
 import { throwError } from 'rxjs';
 
 

@@ -1,14 +1,14 @@
 .container {
     display: grid;
-    grid-template-rows: 8vh min-content min-content;
-    grid-template-columns: 10% 80% 10%;
     grid-template-areas: ". header ." ". group-add ." ". groups .";
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 8vh min-content min-content;
 }
 
 .header {
-    grid-area: header;
-    display: flex;
     align-items: center;
+    display: flex;
+    grid-area: header;
 }
 
 .errors {
@@ -21,26 +21,26 @@
 }
 
 .group__add .add__button {
-    padding: 5px;
     height: 40px;
+    padding: 5px;
 }
 
 .groups {
-    grid-area: groups;
+    align-items: center;
     display: flex;
     flex-direction: column;
+    grid-area: groups;
     justify-content: center;
-    align-items: center;
 }
 
 .groups_group {
-    width: 100%;
+    align-items: center;
     background-color: white;
-    height: 100px;
-    margin: 15px 0 15px 0;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
+    height: 100px;
     justify-content: center;
-    align-items: center;
-    border-radius: 15px;
+    margin: 15px 0 15px 0;
+    width: 100%;
 }

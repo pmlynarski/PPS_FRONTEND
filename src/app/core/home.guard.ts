@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoginService } from './homepage/login/login.service';
+import { CanActivate, Router } from '@angular/router';
+
+import { LoginService } from '../homepage/login/login.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomeGuard implements CanActivate {
-  constructor(private loginService: LoginService,
-              private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {}
+
   canActivate(): boolean {
     if (this.loginService.isLoggedIn()) {
       return true;
@@ -17,5 +17,4 @@ export class HomeGuard implements CanActivate {
       return false;
     }
   }
-
 }

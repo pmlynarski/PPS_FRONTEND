@@ -1,0 +1,9 @@
+<div class="container">
+  <h2>Podaj nazwę swojej grupy</h2>
+  <form [formGroup]="addGroupForm" (ngSubmit)="addGroup()">
+    <label>
+      <input type="text" class="form-control" formControlName="groupName" />
+    </label>
+    <button type="submit">Zapisz</button>
+  </form>
+</div>

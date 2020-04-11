@@ -1,74 +1,75 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Validators, FormControl, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { default as configData } from 'src/app/core/config.js';
+import { IRegisterData } from '../../core/interfaces/user.interfaces';
+import { equalityValidator } from './equality.validator';
 import { RegisterService } from './register.service';
-import { default as configData } from 'src/app/config.js';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   @Input() hidden: boolean;
-  @Output() setHidden = new EventEmitter<boolean>();
-  @Output() showRegisterInfo = new EventEmitter<boolean>();
-  public registerForm: FormGroup;
-  userExists = false;
-  userExistsError = 'User with this email already exists.';
-  roleOptions = ['Lecturer', 'Student'];
-  regExp = configData.passwordRegEx;
-  constructor(public registerService: RegisterService) { }
-  ngOnInit() {
-    this.registerForm = new FormGroup({});
-    this.registerForm.addControl('firstName', new FormControl('', [Validators.required, Validators.minLength(4)]));
-    this.registerForm.addControl('lastName', new FormControl('', [Validators.required, Validators.minLength(4)]));
-    this.registerForm.addControl('email', new FormControl('', [Validators.required, Validators.email]));
-    this.registerForm.addControl('password', new FormControl('',
-    [Validators.required, Validators.pattern(this.regExp), Validators.minLength(8)]));
-    this.registerForm.addControl('repeatPassword', new FormControl('',
-    [Validators.required, this.validateAreEqual.bind(this), Validators.minLength(8)]));
-    this.registerForm.addControl('role', new FormControl('', []));
+  @Output() setHidden: EventEmitter<boolean>;
+  @Output() showRegisterInfo: EventEmitter<boolean>;
+  private registerForm: FormGroup;
+  private readonly regExp: string;
+  private message: string;
 
+  constructor(public registerService: RegisterService) {
+    this.setHidden = new EventEmitter<boolean>();
+    this.showRegisterInfo = new EventEmitter<boolean>();
+    this.regExp = configData.passwordRegEx;
+    this.registerForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.pattern(this.regExp), Validators.minLength(8)]),
+      repeatPassword: new FormControl('', [Validators.required, equalityValidator('password'), Validators.minLength(8)]),
+    });
   }
-  private validateAreEqual(fieldControl: FormControl) {
-    return fieldControl.value === this.registerForm.get('password').value ? null : {
-      NotEqual: true
-    };
-  }
-  get firstName() {
+
+  get firstName(): AbstractControl {
     return this.registerForm.get('firstName');
   }
-  get lastName() {
+
+  get lastName(): AbstractControl {
     return this.registerForm.get('lastName');
   }
-  get email() {
+
+  get email(): AbstractControl {
     return this.registerForm.get('email');
   }
-  get password() {
+
+  get password(): AbstractControl {
     return this.registerForm.get('password');
   }
-  get repeatPassword() {
+
+  get repeatPassword(): AbstractControl {
     return this.registerForm.get('repeatPassword');
   }
-  get role() {
-    return this.registerForm.get('role');
-  }
-  get data() {
+
+  get data(): IRegisterData {
     return {
       first_name: this.firstName.value,
       last_name: this.lastName.value,
       email: this.email.value,
       password: this.password.value,
-      lecturer: this.role.value === 'Lecturer' ? true : false
     };
   }
-  submitRegister() {
+
+  submitRegister(): void {
     this.registerService.registerUser(this.data).subscribe(
-      response => {
-        response.status === 201 ? this.userExists = false : this.userExists = true;
+      () => {
+        this.message = undefined;
         this.showRegisterInfo.emit();
       },
-      error => {
-        error.status === 406 ? this.userExists = true : this.userExists = false;
-      });
+      () => {
+        this.message = 'Provided email is already taken';
+      },
+    );
   }
 }

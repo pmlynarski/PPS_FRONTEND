@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { default as urlData } from 'src/app/config';
+import { default as urlData } from 'src/app/core/config';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

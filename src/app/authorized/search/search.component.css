@@ -1,14 +1,14 @@
 .container {
     display: grid;
-    grid-template-rows: 8vh 8vh min-content;
+    grid-template-areas: ". header ." ". input ." ". results .";
     grid-template-columns: 10% 80% 10%;
-    grid-template-areas: ". header ." ". input ." ". results ."
+    grid-template-rows: 8vh 8vh min-content
 }
 
 .header {
-    grid-area: header;
     display: flex;
     flex-direction: column;
+    grid-area: header;
     justify-content: center;
 }
 
@@ -17,23 +17,23 @@
 }
 
 .search__wrapper .search__field {
-    width: 60%;
-    height: 40px;
+    border: none;
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
-    border: none;
+    height: 40px;
     padding: 5px;
+    width: 60%;
 }
 
 .search__wrapper .search__button {
-    height: 40px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
     border: none;
-    padding: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 15px;
+    height: 40px;
     margin-left: 5px;
+    padding: 5px;
 }
 
 .errors {
@@ -41,19 +41,19 @@
 }
 
 .results {
-    grid-area: results;
     display: flex;
     flex-direction: column;
+    grid-area: results;
 }
 
 .results__result {
-    width: 100%;
-    margin: 15px auto 15px auto;
+    align-items: center;
     background-color: white;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: 100px;
-    border-radius: 15px;
+    justify-content: center;
+    margin: 15px auto 15px auto;
+    width: 100%;
 }

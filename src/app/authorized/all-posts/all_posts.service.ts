@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { default as urlData } from 'src/app/config';
+import { default as urlData } from 'src/app/core/config';
+import { first } from 'rxjs/operators';
 
 @Injectable()
 export class AllPostsService {

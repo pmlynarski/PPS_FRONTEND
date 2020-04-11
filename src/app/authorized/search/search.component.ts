@@ -41,7 +41,7 @@ export class SearchComponent implements OnInit {
           }
         }, error => {
           if (error.status === 406) {
-            this.errors.push(error.error.failed);
+            this.errors.push(error.error.message);
           }
         });
       }

@@ -1,39 +1,39 @@
 .hamburger {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: transparent;
-    width: 35px;
-    height: 30px;
-    border: 0;
-    margin: 0;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    background: transparent;
+    border: 0;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    margin: 0;
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    width: 35px;
+    z-index: 2;
 }
 
 .hamburger__wrapper {
     display: inline-block;
-    width: 30px;
     height: 20px;
     position: relative;
+    width: 30px;
 }
 
 .hamburger__inner {
+    background-color: black;
+    display: inline-block;
+    height: 3px;
+    left: 0;
     position: absolute;
     top: 50%;
-    left: 0;
     transform: translateY(-50%);
-    display: inline-block;
     width: 100%;
-    height: 3px;
-    background-color: black;
 }
 
 .hamburger--active .hamburger__inner {
-    transition: background-color .3s ease-in-out;
     background-color: transparent;
+    transition: background-color .3s ease-in-out;
 }
 
 .hamburger--active .hamburger__inner::before {
@@ -46,38 +46,38 @@
 
 .hamburger__inner::before,
 .hamburger__inner::after {
-    content: '';
     background-color: black;
-    width: 100%;
+    content: '';
     height: 3px;
     transition: transform .3s ease-in-out;
+    width: 100%;
 }
 
 .hamburger__inner::before {
+    left: 0;
     position: absolute;
     top: -10px;
-    left: 0;
 }
 
 .hamburger__inner::after {
+    left: 0;
     position: absolute;
     top: 10px;
-    left: 0;
 }
 
 .nav {
+    background-color: #B5B8BB;
+    display: grid;
+    font-size: 35px;
+    grid-template-areas: "." "home" "groups" "search" "profile" "logout" ".";
+    grid-template-rows: 20% 12% 12% 12% 12% 12% 20%;
+    height: 100vh;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    font-size: 35px;
     transform: translateX(-100vw);
-    background-color: #B5B8BB;
     transition: transform .3s ease-in-out;
-    display: grid;
-    grid-template-rows: 20% 12% 12% 12% 12% 12% 20%;
-    grid-template-areas: "." "home" "groups" "search" "profile" "logout" ".";
+    width: 100vw;
     z-index: 1;
 }
 
@@ -86,14 +86,14 @@
 }
 
 .nav__item {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .nav__item span {
-    width: fit-content;
     height: fit-content;
+    width: fit-content;
 }
 
 .nav__item--home {

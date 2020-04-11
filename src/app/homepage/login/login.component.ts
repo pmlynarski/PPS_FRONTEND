@@ -1,53 +1,53 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { default as configData } from 'src/app/config';
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { LoginService } from 'src/app/homepage/login/login.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { ILoginData } from '../../core/interfaces/user.interfaces';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @Input() hidden: boolean;
-  @Output() setHidden = new EventEmitter<boolean>();
-  passwordRegex = configData.passwordRegEx;
-  wrongCredentials = false;
-  public loginForm: FormGroup;
-  constructor(public loginService: LoginService, private router: Router, private route: ActivatedRoute) {
-    this.loginForm = new FormGroup({});
-    this.loginForm.addControl('email', new FormControl('', [Validators.email, Validators.required]));
-    this.loginForm.addControl('password', new FormControl('', [Validators.required]));
+  @Output() setHidden: EventEmitter<boolean>;
+  private loginForm: FormGroup;
+  private message: string;
+
+  constructor(private loginService: LoginService, private router: Router) {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
+    this.setHidden = new EventEmitter<boolean>();
   }
 
-  ngOnInit() {
-  }
-  get email() {
+  get email(): AbstractControl {
     return this.loginForm.get('email');
   }
-  get password() {
+
+  get password(): AbstractControl {
     return this.loginForm.get('password');
   }
-  get data() {
+
+  get data(): ILoginData {
     return {
       username: this.email.value,
-      password: this.password.value
+      password: this.password.value,
     };
   }
-  submitLogin() {
-    this.loginService.login(this.data).subscribe(response => {
-      if (response === true) {
-        this.wrongCredentials = false;
+
+  submitLogin(): void {
+    this.loginService.login(this.data).subscribe(
+      () => {
+        this.message = undefined;
         this.router.navigate(['/home']);
-      } else {
-        this.wrongCredentials = true;
-      }
-    },
-      error => {
-        this.wrongCredentials = true;
-      }
+      },
+      () => {
+        this.message = 'Wrong login credentials provided';
+      },
     );
   }
 }
