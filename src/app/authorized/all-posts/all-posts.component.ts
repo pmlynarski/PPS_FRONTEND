@@ -26,12 +26,12 @@ export class AllPostsComponent {
     );
   }
 
-  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+  @HostListener('window:scroll') onScrollEvent() {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       if (this.nextUrl !== null) {
         this.allPostsService.getFurtherPosts(this.nextUrl).subscribe(
           (res: any) => {
-            this.posts = [...this.posts, res.results];
+            this.posts = [...this.posts, ...res.results];
             this.nextUrl = res.next;
             this.message = undefined;
           },

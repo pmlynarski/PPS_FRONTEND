@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="post__header">
+    <div class="post__credentials">
+      <span class="post__author">{{ post.owner.first_name }} {{ post.owner.last_name }} </span>
+      <div class="triangle" *ngIf="withGroup"></div>
+      <span class="post__group" *ngIf="withGroup" [routerLink]="['/home/group/' + post.group.id]">
+        {{ post.group.name }}
+      </span>
+      <div class="dropdown__wrapper" [ngClass]="classObj">
+        <button *ngIf="isOwner" class="dropdown__button" (click)="showMenu($event)">
+          <img class="dropdown__icon" alt="dropdown" src="../../../assets/img/arrow.svg" />
+        </button>
+        <div class="dropdown__menu">
+          <div class="options">
+            <div class="option">Edit post</div>
+            <div class="option">Delete post</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post__date">{{ post.date_posted }}</div>
+  </div>
+  <div class="post__content">
+    {{ post.content }}
+  </div>
+</div>

@@ -29,7 +29,7 @@ export class SearchComponent {
       },
     );
   }
-  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+  @HostListener('window:scroll') onScrollEvent() {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       if (this.nextUrl !== null) {
         this.searchService.getFurtherResults(this.nextUrl, this.value).subscribe(

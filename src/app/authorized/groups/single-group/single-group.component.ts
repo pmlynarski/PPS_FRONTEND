@@ -109,12 +109,12 @@ export class SingleGroupComponent implements OnInit {
     });
   }
 
-  @HostListener('window:scroll', ['$event']) onScrollEvent($event): void {
+  @HostListener('window:scroll') onScrollEvent(): void {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       if (this.nextUrl !== null) {
         this.singleGroupService.getFurtherGroupPosts(this.nextUrl).subscribe(
           (response: any) => {
-            this.posts = [...this.posts, response.results];
+            this.posts = [...this.posts, ...response.results];
           },
           (error) => console.log(error),
         );

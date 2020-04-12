@@ -22,50 +22,8 @@
   flex-direction: column;
   grid-area: posts;
   justify-content: center;
-}
-
-.posts__post {
-  background-color: white;
-  border-radius: 15px;
-  margin: 15px 0 15px 0;
   width: 100%;
 }
-
-.post__header {
-  display: grid;
-  padding: 5px 10px 5px 10px;
-  position: relative;
-}
-
-.post__header::after {
-  background-color: black;
-  bottom: 0;
-  content: '';
-  height: 1px;
-  left: 0;
-  position: absolute;
+.post {
   width: 100%;
-}
-
-.post__author,
-.post__group,
-.triangle {
-  font-weight: 600;
-}
-
-.triangle {
-  border-bottom: 5px solid transparent;
-  border-left: 7px solid #555555;
-  border-top: 5px solid transparent;
-  display: inline-block;
-  height: 0;
-  width: 0;
-}
-
-.post__date {
-  font-size: 13px;
-}
-
-.post__content {
-  padding: 5px 10px 5px 10px;
 }

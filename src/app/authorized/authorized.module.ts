@@ -17,6 +17,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { GroupsService } from './groups/groups.service';
 import { SingleGroupComponent } from './groups/single-group/single-group.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 import { SearchComponent } from './search/search.component';
@@ -33,6 +34,7 @@ import { SearchService } from './search/search.service';
     SingleGroupComponent,
     ForeignGroupComponent,
     AddGroupComponent,
+    PostComponent,
   ],
   imports: [CommonModule, RouterModule, routing, FormsModule, ReactiveFormsModule],
   exports: [AuthorizedComponent],
