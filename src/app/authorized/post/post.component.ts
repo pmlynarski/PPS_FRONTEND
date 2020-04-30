@@ -32,12 +32,4 @@ export class PostComponent implements OnInit {
     );
   }
 
-  showMenu($event: Event) {
-    $event.stopPropagation();
-    this.classObj = { active: true };
-  }
-
-  @HostListener('window:click') deactivate() {
-    this.classObj = { active: false };
-  }
 }

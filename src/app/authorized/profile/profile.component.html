@@ -1,84 +1,83 @@
 <div class="container" *ngIf="user">
-  <div class="header">
-    Profile editing
-  </div>
-  <div class="sub-header">
-    Hello <span class="text--strong">{{ user.first_name }}</span
-    >, feel free to edit your credentials. Simply click on them.
-  </div>
-  <div class="profile__wrapper">
-    <div class="profile__first-name">
-      <span class="first-name__label text--strong">First name: </span>
-      <div *ngIf="!firstNameField" class="first-name__wrapper">
-        <span class="first-name__value" (click)="editFirstName()">{{ user.first_name }}</span>
+    <div class="header">
+      <div class="profile-image">
+        <img [src]="'http://127.0.0.1:8000' + user.image"> 
       </div>
-      <div class="edit__wrapper" *ngIf="firstNameField">
-        <input type="text" class="first-name__input profile__input" [(ngModel)]="user.first_name" />
-        <button class="profile__button" (click)="sendFirstName()">Save</button>
-      </div>
+      <span>Hello <span class="text--strong">{{ user.first_name }}</span></span> 
     </div>
-    <div class="profile__last-name">
-      <span class="last-name__label text--strong">Last name: </span>
-      <div *ngIf="!lastNameField" class="last-name__wrapper">
-        <span class="last-name__value" (click)="editLastName()">{{ user.last_name }}</span>
-      </div>
-      <div *ngIf="lastNameField" class="edit__wrapper">
-        <input type="text" class="last-name__input profile__input" [(ngModel)]="user.last_name" />
-        <button class="profile__button" (click)="sendLastName()">Save</button>
-      </div>
+    <div class="sub-header">
+      <span>Feel free to edit your credentials.</span> <span>Simply click on them.</span>
     </div>
-    <div class="profile__email">
-      <span class="email__label text--strong">Email: </span>
-      <div *ngIf="!emailField" class="email__wrapper">
-        <span (click)="editEmail()" class="email__value">{{ user.email }}</span>
-      </div>
-      <div *ngIf="emailField" class="edit__wrapper">
-        <input type="email" class="email__input profile__input" [(ngModel)]="user.email" />
-        <button class="profile__button" (click)="sendEmail()">Save</button>
-      </div>
-    </div>
-    <div class="profile__change-password" (click)="passwordFormReveal()">
-      Change password
-    </div>
-    <div class="password__wrapper" *ngIf="passwordChange">
-      <form [formGroup]="changePasswordForm" (ngSubmit)="submitPassword()">
-        <input class="password__input profile__input" type="password" placeholder="Password" formControlName="password" />
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="password--error message--error">
-          <div *ngIf="password.errors.required">
-            Password is required.
-          </div>
-          <div *ngIf="password.errors.minlength">
-            Password must be at least 8 characters long.
-          </div>
-          <div *ngIf="password.errors.pattern">
-            Working password conditions:
-            <ul>
-              <li>At least 8 characters in length</li>
-              <li>Lowercase letters</li>
-              <li>Uppercase letters</li>
-              <li>Numbers Special characters</li>
-            </ul>
-          </div>
+    <input type="image" src="../../../assets/img/upload.png" alt="Submit" width="48" height="48">
+    <div class="profile__wrapper">
+      <div class="profile__first-name ">
+        <span class="first-name__label text--strong">First name: </span>
+        <div *ngIf="!firstNameField" class="first-name__wrapper">
+          <span class="first-name__value" (click)="editFirstName()">{{ user.first_name }}</span>
         </div>
-        <input
-          class="repeat-password__input profile__input"
-          type="password"
-          placeholder="Repeat password"
-          formControlName="repeatPassword"
-        />
-        <button [disabled]="changePasswordForm.invalid" class="profile__button change-password__button" type="submit">Save</button>
-        <div
-          *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)"
-          class="repeat-password--error message--error"
-        >
-          <div *ngIf="repeatPassword.errors.required">
-            Repeating password is required.
-          </div>
-          <div *ngIf="!repeatPassword.equalityValidator">
-            Passwords are not the same.
-          </div>
+        <div class="edit__wrapper" *ngIf="firstNameField">
+          <input type="text" class="first-name__input profile__input" [(ngModel)]="user.first_name" />
+          <button class="profile__button" (click)="sendFirstName()">Save</button>
         </div>
-      </form>
+      </div>
+      <div class="profile__last-name">
+        <span class="last-name__label text--strong">Last name: </span>
+        <div *ngIf="!lastNameField" class="last-name__wrapper">
+          <span class="last-name__value" (click)="editLastName()">{{ user.last_name }}</span>
+        </div>
+        <div *ngIf="lastNameField" class="edit__wrapper">
+          <input type="text" class="last-name__input profile__input" [(ngModel)]="user.last_name" />
+          <button class="profile__button" (click)="sendLastName()">Save</button>
+        </div>
+      </div>
+      <div class="profile__email">
+        <span class="email__label text--strong">Email: </span>
+        <div *ngIf="!emailField" class="email__wrapper">
+          <span (click)="editEmail()" class="email__value">{{ user.email }}</span>
+        </div>
+        <div *ngIf="emailField" class="edit__wrapper">
+          <input type="email" class="email__input profile__input" [(ngModel)]="user.email" />
+          <button class="profile__button" (click)="sendEmail()">Save</button>
+        </div>
+      </div>
+      <div class="profile__change-password" (click)="passwordFormReveal()">
+        Change password
+      </div>
+      <div class="password__wrapper" *ngIf="passwordChange">
+        <form [formGroup]="changePasswordForm" (ngSubmit)="submitPassword()">
+          <input class="password__input profile__input" type="password" placeholder="Password"
+            formControlName="password" />
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="password--error message--error">
+            <div *ngIf="password.errors.required">
+              Password is required.
+            </div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 8 characters long.
+            </div>
+            <div *ngIf="password.errors.pattern">
+              Working password conditions:
+              <ul>
+                <li>At least 8 characters in length</li>
+                <li>Lowercase letters</li>
+                <li>Uppercase letters</li>
+                <li>Numbers Special characters</li>
+              </ul>
+            </div>
+          </div>
+          <input class="repeat-password__input profile__input" type="password" placeholder="Repeat password"
+            formControlName="repeatPassword" />
+          <button [disabled]="changePasswordForm.invalid" class="profile__button change-password__button"
+            type="submit">Save</button>
+          <div *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)"
+            class="repeat-password--error message--error">
+            <div *ngIf="repeatPassword.errors.required">
+              Repeating password is required.
+            </div>
+            <div *ngIf="!repeatPassword.equalityValidator">
+              Passwords are not the same.
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
 </div>

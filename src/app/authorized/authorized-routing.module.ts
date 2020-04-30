@@ -18,7 +18,6 @@ const routes: Routes = [
     children: [
       { path: 'posts', component: AllPostsComponent },
       { path: 'groups', component: GroupsComponent },
-      { path: 'groups/add', component: AddGroupComponent },
       { path: 'group/:id', component: SingleGroupComponent },
       { path: 'group/foreign/:id', component: ForeignGroupComponent },
       { path: 'search', component: SearchComponent },

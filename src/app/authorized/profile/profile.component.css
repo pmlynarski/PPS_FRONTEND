@@ -1,23 +1,54 @@
 .container {
-    display: grid;
-    grid-template-areas: ". header ." ". sub-header ." ". credentials .";
-    grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 8vh 8vh min-content;
+    background-color: white;
+    color:rgb(94, 0, 138);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url("../../../assets/img/tło4.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
 }
 
 .header {
     display: flex;
-    flex-direction: column;
-    grid-area: header;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 45px 0 25px 15px;
+}
+
+.header span{
+    width: 50%;
+}
+
+.profile-image{
+    display: flex;
+    justify-content: left;
+    padding-right: 25px;
+    width: 50%;
+}
+.profile-image img{
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    border:5px solid  white;
+
 }
 
 .sub-header {
-    grid-area: sub-header;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile__wrapper {
-    grid-area: credentials;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    padding: 25px;
 }
 
 .profile__first-name,
@@ -65,4 +96,8 @@
 
 .repeat-password__input {
     display: inline-block;
+}
+
+.profile__change-password{
+    margin-top: 35px;
 }

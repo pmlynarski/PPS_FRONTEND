@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,8 +12,11 @@ import { AddGroupService } from './add-group.service';
 export class AddGroupComponent {
   private addGroupForm: FormGroup;
   private message: string;
+  @Output() setHidden: EventEmitter<boolean>;
+
 
   constructor(private addGroupService: AddGroupService, private router: Router) {
+    this.setHidden = new EventEmitter<boolean>();
     this.addGroupForm = new FormGroup({
       groupName: new FormControl('', [Validators.required]),
     });
@@ -27,7 +30,6 @@ export class AddGroupComponent {
     this.addGroupService.addGroup({ name: this.groupName.value }).subscribe(
       () => {
         this.message = undefined;
-        this.router.navigate(['/home/groups']);
       },
       (error) => {
         this.message = error.message;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';
 
-import { default as configData } from 'src/app/core/config.js';
+import config, { default as configData } from 'src/app/core/config.js';
 import { IUserData } from '../../core/interfaces/user.interfaces';
 import { equalityValidator } from '../../homepage/register/equality.validator';
 import { ProfileService } from './profile.service';
@@ -46,6 +46,7 @@ export class ProfileComponent {
   getUserCredentials(): void {
     this.profileService.getUsersCredentials().subscribe((response) => {
       this.user = response;
+      console.log(response)
     });
   }
 
@@ -97,12 +98,12 @@ export class ProfileComponent {
     );
   }
 
-  passwordFormReveal(value = true): void {
-    this.passwordChange = value;
+  passwordFormReveal(): void {
+    this.passwordChange =  !this.passwordChange;
   }
 
   submitPassword(): void {
-    this.passwordFormReveal(false);
+    this.passwordFormReveal();
     this.profileService.sendUserData({ password: this.password.value }).subscribe(
       () => {
         this.getUserCredentials();
@@ -112,4 +113,6 @@ export class ProfileComponent {
       },
     );
   }
+
+  repairLinks = (images: string[]) => images.map(element => `${config.host}${element}`);
 }

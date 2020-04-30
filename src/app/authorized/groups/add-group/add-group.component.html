@@ -1,10 +1,13 @@
 <div class="container">
-  <h2>Podaj nazwę swojej grupy</h2>
-  <form [formGroup]="addGroupForm" (ngSubmit)="addGroup()">
-    <label>
-      <input type="text" class="form-control" formControlName="groupName" />
-    </label>
-    <button type="submit">Zapisz</button>
-    <p *ngIf="message">{{ message }}</p>
-  </form>
+  <button class="box__leave" (click)="this.setHidden.emit()"><span></span></button>
+  <div class="content">
+    <span>Podaj nazwę swojej grupy</span>
+    <form [formGroup]="addGroupForm" (ngSubmit)="addGroup()">
+      <label>
+        <input type="text" class="form-control" formControlName="groupName" />
+      </label>
+      <button type="submit">Zapisz</button>
+      <p *ngIf="message">{{ message }}</p>
+    </form>
+  </div>
 </div>
