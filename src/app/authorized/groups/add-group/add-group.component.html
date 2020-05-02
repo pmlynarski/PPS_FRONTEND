@@ -1,12 +1,12 @@
 <div class="container">
   <button class="box__leave" (click)="this.setHidden.emit()"><span></span></button>
   <div class="content">
-    <span>Podaj nazwę swojej grupy</span>
+    <span>Enter group name:</span>
     <form [formGroup]="addGroupForm" (ngSubmit)="addGroup()">
       <label>
         <input type="text" class="form-control" formControlName="groupName" />
       </label>
-      <button type="submit">Zapisz</button>
+      <button type="submit">Save</button>
       <p *ngIf="message">{{ message }}</p>
     </form>
   </div>

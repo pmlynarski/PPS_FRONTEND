@@ -18,7 +18,6 @@ export class GroupsComponent {
       (response: any) => {
         this.message = undefined;
         this.groups = response.results;
-        console.log(response)
       },
       (error) => {
         this.message = error.error.message;

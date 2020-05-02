@@ -3,6 +3,7 @@
     grid-template-areas: ". header ." ". group-add ." ". groups .";
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 8vh min-content min-content;
+    margin: 0 auto;
 }
 
 .header {
@@ -58,7 +59,7 @@
     color: white;
     padding: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    width: 85vw;
+    width: 95%;
 }
 
 .content{
@@ -81,3 +82,10 @@
     font-weight: 600;
     padding-right: 5px;
 }
+
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 60%;
+    }
+  
+  }

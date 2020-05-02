@@ -5,18 +5,18 @@
     >?
   </div>
   <div class="confirmation__buttons">
-    <button *ngIf="!isGroupOwner" class="button--green" (click)="leaveGroup(groupId)">Yes</button>
-    <button *ngIf="isGroupOwner" class="button--green" (click)="deleteGroup(groupId)">Yes</button>
-    <button class="button--red cancel" (click)="showConfirmation()">No</button>
+    <button *ngIf="!isGroupOwner" class="yes__button" (click)="leaveGroup(groupId)">Yes</button>
+    <button *ngIf="isGroupOwner" class="yes__button" (click)="deleteGroup(groupId)">Yes</button>
+    <button class="cancel_button" (click)="showConfirmation()">No</button>
   </div>
 </div>
 <div class="container" *ngIf="group">
   <div class="header">
     <div class="button__wrapper">
-      <button *ngIf="!isGroupOwner" class="button--red" (click)="showConfirmation()">
+      <button *ngIf="!isGroupOwner" class="cancel_button" (click)="showConfirmation()">
         Leave
       </button>
-      <button *ngIf="isGroupOwner" class="button--red" (click)="showConfirmation()">
+      <button *ngIf="isGroupOwner" class="cancel_button" (click)="showConfirmation()">
         Delete
       </button>
     </div>

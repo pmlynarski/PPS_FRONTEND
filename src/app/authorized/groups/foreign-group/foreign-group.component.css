@@ -3,6 +3,8 @@
     grid-template-areas: ". header ." ". content .";
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 9vh min-content;
+    margin: 0 auto;
+
 }
 
 .header {
@@ -44,32 +46,31 @@
 }
 
 .confirmation {
-    background-color: #DCE2E8;
-    border: 1px grey solid;
+    background-color: white;
+    color: rgb(94, 0, 138);
+    border: 1px rgb(94, 0, 138) solid;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     height: fit-content;
     justify-content: space-between;
-    left: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 15px 25px 15px 25px;
     position: absolute;
     top: 35%;
-    transform: translateY(-50%);
-    transform: translateX(0);
-    transition: transform .5s ease-in-out;
-    width: 80%;
+    width: 350px;
     z-index: 2;
 }
 
 .confirmation--hidden {
-    transform: translateX(-100vh);
+    display: none;
 }
 
 .confirmation__text {
     font-size: 24px;
     margin-bottom: 25px;
-    text-align: justify;
+    text-align: center;
 }
 
 .confirmation__buttons {
@@ -77,3 +78,31 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+  
+  .yes__button{
+    background-color: white;
+    color: rgb(94, 0, 138);
+    border: 1px rgb(94, 0, 138) solid;
+    width: 55px;
+    height: 35px;
+    box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+  
+  }
+  
+  .cancel_button{
+    color: white;
+    background-color: rgb(94, 0, 138);
+    width: 55px;
+    height: 35px;
+    box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+  
+  }
+
+
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 60%;
+    }
+  
+  }

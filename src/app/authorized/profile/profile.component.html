@@ -2,13 +2,25 @@
     <div class="header">
       <div class="profile-image">
         <img [src]="'http://127.0.0.1:8000' + user.image"> 
+        <div class="edit-image-button" (click)="showEditImage()">
+          <img class="" src="../../../assets/img/upload.png"/>
+        </div>
       </div>
       <span>Hello <span class="text--strong">{{ user.first_name }}</span></span> 
     </div>
     <div class="sub-header">
       <span>Feel free to edit your credentials.</span> <span>Simply click on them.</span>
     </div>
-    <input type="image" src="../../../assets/img/upload.png" alt="Submit" width="48" height="48">
+    <div class="edit-image" *ngIf="editImage" >
+      <div class="close-update">
+          <span (click)="showEditImage()" ></span>
+      </div>
+      <div class="upload-content">
+        <input type="file" (change)="onFileSelected($event)" class="inputfile">
+        <button class="profile__button" (click)=" sendImage()">Save</button>
+        <span class="message--error"> {{resultMessage}} </span>
+      </div>
+    </div>
     <div class="profile__wrapper">
       <div class="profile__first-name ">
         <span class="first-name__label text--strong">First name: </span>

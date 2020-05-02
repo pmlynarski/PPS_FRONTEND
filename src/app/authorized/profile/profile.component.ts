@@ -21,8 +21,12 @@ export class ProfileComponent {
   private passwordChange: boolean;
   private changePasswordForm: FormGroup;
   private readonly regExp: string;
+  private editImage: boolean;
+  image: File;
 
   constructor(private profileService: ProfileService) {
+    this.editImage = false;
+
     this.regExp = configData.passwordRegEx;
     this.getUserCredentials();
     this.changePasswordForm = new FormGroup({
@@ -46,7 +50,6 @@ export class ProfileComponent {
   getUserCredentials(): void {
     this.profileService.getUsersCredentials().subscribe((response) => {
       this.user = response;
-      console.log(response)
     });
   }
 
@@ -115,4 +118,28 @@ export class ProfileComponent {
   }
 
   repairLinks = (images: string[]) => images.map(element => `${config.host}${element}`);
+
+  onFileSelected(event){
+    this.image = <File>event.srcElement.files[0];
+  }
+
+  sendImage(): void {
+    const fd =  new FormData;
+    fd.append('image', this.image, this.image.name)
+
+    this.profileService.sendUserData(fd).subscribe(
+      (response) => {
+        this.getUserCredentials();
+        this.showEditImage()
+      },
+      (event) => {
+        this.resultMessage = 'Something is wrong!';
+      },
+    );
+  }
+
+  showEditImage(){
+    this.editImage = !this.editImage;
+  }
+
 }

@@ -1,3 +1,10 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+
+}
+
 .hamburger {
     align-items: center;
     background: transparent;
@@ -119,3 +126,25 @@
 .nav__item--logout {
     grid-area: logout;
 }
+
+
+@media only screen and (min-width: 768px) {
+    .nav {
+        position: static;
+        background-color: rgba(94, 0, 138, 1);
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        font-size: 25px;
+        width: 60%;
+        height: 60px;
+        left: 0;
+        top: 0;
+        transform: translateX(0);
+        margin: 0 auto;
+    }
+    .hamburger {
+        display: none;
+    }
+  
+  }

@@ -3,13 +3,14 @@
   grid-template-areas: '. header .' '. posts .';
   grid-template-columns: 5% 90% 5%;
   grid-template-rows: 8vh min-content;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   background-color: white;
   color: rgb(94, 0, 138);
   background-image: url("../../../assets/img/tło3.png");
   background-position: bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  margin: 0 auto;
 }
 
 .header {
@@ -34,11 +35,14 @@
   
 }
 .post {
-  background-color: white;
   width: 100%;
-  box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
-  border-radius: 25px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(94, 0, 138, .1);
-  
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+      width: 60%;
+      background-image: url("../../../assets/img/tło2.png");
+
+  }
+
 }

@@ -3,6 +3,10 @@
   grid-template-areas: '. header .' '. content .';
   grid-template-columns: 10% 80% 10%;
   grid-template-rows: 9vh min-content;
+  color: rgb(94, 0, 138);
+  margin: 0 auto;
+
+
 }
 
 .header {
@@ -46,7 +50,7 @@
 }
 
 .posts__post {
-  background-color: white;
+  background-color: red;
   border-radius: 15px;
   margin: 15px 0 15px 0;
   width: 100%;
@@ -83,46 +87,92 @@
 }
 
 .confirmation {
-  background-color: #dce2e8;
-  border: 1px grey solid;
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px rgb(94, 0, 138) solid;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   height: fit-content;
   justify-content: space-between;
-  left: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 15px 25px 15px 25px;
   position: absolute;
   top: 35%;
-  transform: translateY(-50%);
-  transform: translateX(0);
-  transition: transform 0.5s ease-in-out;
-  width: 80%;
+  width: 350px;
   z-index: 2;
 }
 
 .confirmation--hidden {
-  transform: translateX(-100vh);
+  display: none;
+
 }
 
 .confirmation__text {
   font-size: 24px;
   margin-bottom: 25px;
-  text-align: justify;
+  text-align: center;
 }
 
 .confirmation__buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .textarea {
-  height: 100px;
+  height: 200px;
   resize: none;
   width: 100%;
+  border: 1px rgb(94, 0, 138) solid;
+  border-radius: 25px;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+  padding: 20px;
+
 }
 
 .add-post__button {
   display: block;
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px rgb(94, 0, 138) solid;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+  margin: 15px auto;
+  width: 50%;
+  height: 35px;
+  border-radius: 25px;
+  font-size: 20px;
+}
+
+.add-post__button:hover{
+  color: white;
+  background-color: rgb(94, 0, 138);
+  cursor: pointer;
+}
+
+.yes__button{
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px rgb(94, 0, 138) solid;
+  width: 55px;
+  height: 35px;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+
+}
+
+.cancel_button{
+  color: white;
+  background-color: rgb(94, 0, 138);
+  width: 55px;
+  height: 35px;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+
+}
+
+
+@media only screen and (min-width: 768px) {
+  .container {
+      width: 60%;
+  }
 }
