@@ -23,6 +23,7 @@ export class PendingListComponent implements OnInit, OnDestroy {
     private singleGroupService: SingleGroupService,
     private router: Router,
   ) {
+    this.subscription = new Subscription();
     this.groupId = parseInt(this.route.snapshot.paramMap.get('id'), 0);
     this.loadPendingUsers();
     this.singleGroupService.isGroupOwner(this.groupId).subscribe(
@@ -34,7 +35,7 @@ export class PendingListComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
   loadPendingUsers() {
-    this.subscription = this.pendingService.getPendingList(this.groupId).subscribe(
+    const subscription = this.pendingService.getPendingList(this.groupId).subscribe(
       (response) => {
         this.nextUrl = response.next;
         this.userList = response.results.map((element) => ({ ...element.user }));
@@ -44,6 +45,7 @@ export class PendingListComponent implements OnInit, OnDestroy {
         this.userList = [];
       },
     );
+    this.subscription.add(subscription);
   }
 
   accept(id: number) {
