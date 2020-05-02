@@ -22,6 +22,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './search/search.service';
+import { PendingListComponent } from './groups/pending-list/pending-list.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SearchService } from './search/search.service';
     ForeignGroupComponent,
     AddGroupComponent,
     PostComponent,
+    PendingListComponent,
   ],
   imports: [CommonModule, RouterModule, routing, FormsModule, ReactiveFormsModule],
   exports: [AuthorizedComponent],

@@ -45,11 +45,16 @@
           {{ group.membersCount }}
         </span>
       </div>
+      <div class="pending-members__link">
+        <span class="text--link text--strong" [routerLink]="['/home/group/' + groupId + '/pending']" *ngIf="isGroupOwner">
+          Pending members
+        </span>
+      </div>
     </div>
     <div class="post__form">
       <form [formGroup]="postForm" (ngSubmit)="addPost()">
         <textarea class="textarea" formControlName="content"></textarea>
-        <button type="submit" class="add-post__button">Dodaj post</button>
+        <button type="submit" class="add-post__button">Add post</button>
       </form>
     </div>
     <div class="group__posts">
