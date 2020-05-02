@@ -1,7 +1,7 @@
 .container {
     display: grid;
     grid-template-areas: ". header ." ". group-add ." ". groups .";
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 5% 90% 5%;
     grid-template-rows: 8vh min-content min-content;
     margin: 0 auto;
 }
@@ -32,6 +32,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .group__add .add__button img{
@@ -41,7 +42,6 @@
 }
 
 .groups {
-    padding: 20px 0;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -60,6 +60,7 @@
     padding: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     width: 95%;
+    cursor: pointer;
 }
 
 .content{
@@ -87,5 +88,5 @@
     .container {
         width: 60%;
     }
-  
+
   }

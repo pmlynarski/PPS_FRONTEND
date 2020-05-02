@@ -104,6 +104,13 @@
     letter-spacing: 2px;
     box-shadow: 10px 10px 10px rgba(94, 0, 138, .5);
     border: none;
+    cursor: pointer;
+}
+
+.login__form button:hover{
+    letter-spacing: 5px;
+    background-color: rgb(129, 22, 179);
+
 }
 
 .message--error{

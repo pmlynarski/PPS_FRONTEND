@@ -142,9 +142,20 @@
         top: 0;
         transform: translateX(0);
         margin: 0 auto;
+        font-size: 21px;
     }
     .hamburger {
         display: none;
+    }
+
+    .nav__item{
+        width: 20%;
+    }
+
+    .nav__item:hover{
+        background-color: white;
+        color: rgb(94, 0, 138, 1);
+        cursor: pointer;
     }
   
   }

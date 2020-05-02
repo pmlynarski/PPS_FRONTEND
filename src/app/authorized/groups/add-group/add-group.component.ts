@@ -30,6 +30,7 @@ export class AddGroupComponent {
     this.addGroupService.addGroup({ name: this.groupName.value }).subscribe(
       () => {
         this.message = undefined;
+        this.setHidden.emit();
       },
       (error) => {
         this.message = error.message;

@@ -3,7 +3,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { HomeGuard } from '../core/home.guard';
 import { TokenInterceptor } from '../core/token.interceptor';
 import { AllPostsComponent } from './all-posts/all-posts.component';
@@ -22,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './search/search.service';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,8 @@ import { SearchService } from './search/search.service';
     ForeignGroupComponent,
     AddGroupComponent,
     PostComponent,
+    PostDetailsComponent
+    ,
   ],
   imports: [CommonModule, RouterModule, routing, FormsModule, ReactiveFormsModule],
   exports: [AuthorizedComponent],
