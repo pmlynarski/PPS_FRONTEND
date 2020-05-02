@@ -1,7 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { IUserData } from '../../../core/interfaces/user.interfaces';
+import { SingleGroupService } from '../single-group/single-group.service';
 import { PendingListService } from './pending-list.service';
 
 @Component({
@@ -16,9 +17,18 @@ export class PendingListComponent implements OnInit, OnDestroy {
   message: string;
   nextUrl: string;
 
-  constructor(private pendingService: PendingListService, private route: ActivatedRoute) {
+  constructor(
+    private pendingService: PendingListService,
+    private route: ActivatedRoute,
+    private singleGroupService: SingleGroupService,
+    private router: Router,
+  ) {
     this.groupId = parseInt(this.route.snapshot.paramMap.get('id'), 0);
     this.loadPendingUsers();
+    this.singleGroupService.isGroupOwner(this.groupId).subscribe(
+      () => {},
+      () => this.router.navigate(['/home/groups']),
+    );
   }
 
   ngOnInit() {}
