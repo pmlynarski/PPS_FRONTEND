@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="header">
+        <div class="post__date">22-05-2020</div>
+        <div class="post__credentials">
+            <span class="post__group">
+                Pjeski
+            </span>
+            <div class="post__user">
+                <span>Jan Kowalski</span>
+                <img src="../../../assets/img/default.png">
+            </div>
+        </div>
+    </div>
+    <div class="post__content">
+        Nananananananaan test posta blablablabkabla
+    </div>
+    <div class="post__comments">
+        <div class="comment">
+            <div class="comment__user">
+                <img src="../../../assets/img/default.png">
+                <div class="comment__date">22-05-2020</div>
+            </div>
+              <div class="comment__credentials">
+                <div class="comment__header">
+                  <span>Jan Kowlaski</span>
+                </div>
+                <div class="comment__content" [routerLink]="['/home/post/' + post.id]">
+                    Nananananananaan test posta blablablabkabla
+                </div>
+        </div>
+    </div>
+</div>

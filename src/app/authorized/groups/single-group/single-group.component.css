@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-template-areas: '. header .' '. content .';
-  grid-template-columns: 10% 80% 10%;
+  grid-template-columns: 5% 90% 5%;
   grid-template-rows: 9vh min-content;
   color: rgb(94, 0, 138);
   margin: 0 auto;
@@ -21,18 +21,20 @@
   display: block;
 }
 
-.button--red,
-.button--green {
-  height: 40px;
-  width: 80px;
+.button__wrapper button{
+  width: 55px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 16px;
 }
+
 
 .group__content {
   grid-area: content;
 }
 
 .group__info {
-  font-size: 24px;
+  font-size: 15px;
 }
 
 .group__name,
@@ -156,8 +158,21 @@
   color: rgb(94, 0, 138);
   border: 1px rgb(94, 0, 138) solid;
   width: 55px;
-  height: 35px;
+  height: 55px;
   box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+  cursor: pointer;
+}
+
+.cancel_button:hover {
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px solid rgb(94, 0, 138);
+
+}
+
+.yes__button:hover{
+  background-color: rgb(94, 0, 138);
+  color: white;
 
 }
 
@@ -165,9 +180,9 @@
   color: white;
   background-color: rgb(94, 0, 138);
   width: 55px;
-  height: 35px;
+  height: 25px;
   box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
-
+  cursor: pointer;
 }
 
 
@@ -175,4 +190,13 @@
   .container {
       width: 60%;
   }
+
+  .button__wrapper button {
+    width: 75px;
+    height: 45px;
+  }
+
+  
+
+  
 }

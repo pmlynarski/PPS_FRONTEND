@@ -10,6 +10,7 @@ import { PendingListComponent } from './groups/pending-list/pending-list.compone
 import { SingleGroupComponent } from './groups/single-group/single-group.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,8 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'groups/create', component: AddGroupComponent },
       { path: '', redirectTo: 'posts', pathMatch: 'full' },
+      { path: 'post/:id', component: PostDetailsComponent },
+
     ],
   },
 ];

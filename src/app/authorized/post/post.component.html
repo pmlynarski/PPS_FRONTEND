@@ -1,18 +1,17 @@
-<div class="container">
-  <div class="post__user">
-    <img [src]="'http://127.0.0.1:8000' + post.owner.image" />
-    <span>{{ post.owner.first_name }} </span>
-    <span>{{ post.owner.last_name }} </span>
-  </div>
-  <div class="post__credentials">
-    <div class="post__header">
-      <span class="post__group" *ngIf="withGroup" [routerLink]="['/home/group/' + post.group.id]">
-        {{ post.group.name }}
-      </span>
-      <div class="post__date">{{ post.date_posted }}</div>
+<div class="container" >
+    <div class="post__user">
+      <img [src]="'http://127.0.0.1:8000' + post.owner.image">
+      <span>{{ post.owner.first_name }} </span>
+      <span>{{ post.owner.last_name }} </span>
     </div>
-    <div class="post__content">
-      {{ post.content }}
-    </div>
-  </div>
+    <div class="post__credentials">
+      <div class="post__header">
+        <span class="post__group" *ngIf="withGroup" [routerLink]="['/home/group/' + post.group.id]">
+          {{ post.group.name }}
+        </span>
+        <div class="post__date">{{ post.date_posted }}</div>
+      </div>
+      <div class="post__content" [routerLink]="['/home/post/' + post.id]">
+        {{ post.content }}
+      </div>
 </div>

@@ -79,10 +79,18 @@
     background-color: rgb(94, 0, 138);
     border-radius: 25px;
     color: white;
-    letter-spacing: 2px;
     box-shadow: 10px 10px 10px rgba(94, 0, 138, .5);
     border: none;
     margin: 15px 0;
+    cursor: pointer;
+    
+}
+
+.register__form button:hover {
+    background-color: rgb(129, 22, 179);
+    letter-spacing: 2px;
+
+
 }
 
 .register__form ul {
