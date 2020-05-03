@@ -23,6 +23,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchService } from './search/search.service';
 import { PendingListComponent } from './groups/pending-list/pending-list.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { PostDetailsService } from './post-details/post-details.service';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     SearchService,
     ProfileService,
     ForeignGroupService,
+    PostDetailsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

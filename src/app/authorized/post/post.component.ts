@@ -3,6 +3,7 @@ import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
 
 import { IPost } from '../../core/interfaces/posts.interfaces';
 import { ProfileService } from '../profile/profile.service';
+import { PostDetailsService } from '../post-details/post-details.service';
 
 @Component({
   selector: 'app-post',
@@ -15,7 +16,8 @@ export class PostComponent implements OnInit {
   private isOwner: boolean;
   private classObj: { active: boolean };
 
-  constructor(private profileService: ProfileService, @Inject(DOCUMENT) private document: Document) {
+  constructor(private profileService: ProfileService, @Inject(DOCUMENT) private document: Document,
+  private postDetailsService: PostDetailsService) {
     this.classObj = {
       active: false,
     };
@@ -30,6 +32,7 @@ export class PostComponent implements OnInit {
         this.isOwner = false;
       },
     );
+
   }
 
 }

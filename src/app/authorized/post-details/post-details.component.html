@@ -1,32 +1,43 @@
-<div class="container">
+<div class="container" *ngIf="post">
     <div class="header">
-        <div class="post__date">22-05-2020</div>
+        <div class="post__date">{{post.date_posted}}</div>
         <div class="post__credentials">
-            <span class="post__group">
-                Pjeski
+            <span class="post__group" [routerLink]="['/home/group', post.group.id]">
+                {{post.group.name}}
             </span>
             <div class="post__user">
-                <span>Jan Kowalski</span>
-                <img src="../../../assets/img/default.png">
+                <span>{{post.owner.first_name}} {{post.owner.last_name}}</span>
+                <img [src]="'http://127.0.0.1:8000' + post.owner.image">
             </div>
         </div>
     </div>
     <div class="post__content">
-        Nananananananaan test posta blablablabkabla
+        {{post.content}}
     </div>
     <div class="post__comments">
-        <div class="comment">
+        <div class="comment__form">
+            <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+              <textarea class="textarea" formControlName="content"></textarea>
+                <button type="submit" class="add-comment__button">Add comment</button>
+            </form>
+            <input type='file' class="load-file" style="color: white;" (change)="onFileSelected($event)">
+
+        </div>
+        <div  class="comment" *ngFor="let comment of comments">
             <div class="comment__user">
                 <img src="../../../assets/img/default.png">
-                <div class="comment__date">22-05-2020</div>
+                <div class="comment__date">{{comment.date_commented}}</div>
             </div>
               <div class="comment__credentials">
                 <div class="comment__header">
-                  <span>Jan Kowlaski</span>
+                  <span>{{comment.owner.first_name}} {{comment.owner.last_name}}</span>
                 </div>
-                <div class="comment__content" [routerLink]="['/home/post/' + post.id]">
-                    Nananananananaan test posta blablablabkabla
+                <div class="comment__content">
+                    {{comment.content}}
                 </div>
+                <div class="file">
+                    {{comment.file}}
+                </div>
+            </div>
         </div>
     </div>
-</div>
