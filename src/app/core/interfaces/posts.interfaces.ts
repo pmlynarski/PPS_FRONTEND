@@ -7,4 +7,5 @@ export interface IPost {
   content: string;
   date_posted: string;
   group: IGroupSafe;
+  file: any;
 }

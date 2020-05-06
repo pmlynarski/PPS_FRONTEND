@@ -5,14 +5,14 @@
   position: relative;
   width: 100%;
   color: rgb(94, 0, 138);
-  box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
   display: flex;
   flex-direction: row;
   border-radius: 25px;
-  border: 1px solid rgba(94, 0, 138, .1);
+  border: 1px solid rgba(94, 0, 138, 0.1);
 }
 
-.post__user{
+.post__user {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -21,37 +21,34 @@
   padding: 0 10px 0 5px;
 }
 
-.post__user img{
+.post__user img {
   width: 50px;
   height: 50px;
   border-radius: 100px;
 }
 
-.post__user span{
+.post__user span {
   font-size: 12px;
   color: rgb(46, 46, 46);
-
 }
 
-.post__credentials{
+.post__credentials {
   width: 90%;
   padding: 0 15px;
 }
 
-.post__header{
+.post__header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
-.post__header span{
+.post__header span {
   cursor: pointer;
 }
 
 .post__date {
   font-size: 11px;
   color: rgb(46, 46, 46);
-
 }
 
 .post__content {
@@ -63,6 +60,65 @@
   word-break: break-all;
 }
 
+.icons__wrapper {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+}
 
+.icon {
+  margin: 0 3px;
+  height: 21px;
+  width: 24px;
+  padding: 0 3px;
+}
 
+button {
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px rgb(94, 0, 138) solid;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
+  height: 35px;
+  width: 65px;
+  border-radius: 15px;
+  font-size: 13px;
+}
 
+button:hover {
+  color: white;
+  background-color: rgb(94, 0, 138);
+  cursor: pointer;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-group__input {
+  min-height: 80px;
+  resize: none;
+  width: 100%;
+}
+
+.confirmation {
+  padding: 10px;
+  width: 300px;
+  height: 200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 0 15px rgba(94, 0, 138, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.button__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

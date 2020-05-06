@@ -2,7 +2,6 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 import { IGroupFull } from '../../../core/interfaces/groups.interfaces';
 import { IPost } from '../../../core/interfaces/posts.interfaces';
@@ -26,7 +25,6 @@ export class SingleGroupComponent implements OnInit {
   image: File;
   file: File;
 
-
   constructor(
     private singleGroupService: SingleGroupService,
     private activatedRoute: ActivatedRoute,
@@ -48,16 +46,7 @@ export class SingleGroupComponent implements OnInit {
         this.router.navigate(['/home/groups']);
       },
     );
-    this.singleGroupService.getGroupPosts(this.groupId).subscribe(
-      (response) => {
-        this.posts = [...response.results];
-        this.nextUrl = response.next;
-      },
-      (error) => {
-        console.log(error);
-        this.message = error.message;
-      },
-    );
+    this.loadPosts();
     this.singleGroupService.isGroupOwner(this.groupId).subscribe(
       () => {
         this.isGroupOwner = true;
@@ -68,10 +57,22 @@ export class SingleGroupComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   get content() {
     return this.postForm.get('content');
+  }
+
+  loadPosts() {
+    this.singleGroupService.getGroupPosts(this.groupId).subscribe(
+      (response) => {
+        this.posts = response.results;
+        this.nextUrl = response.next;
+      },
+      (error) => {
+        this.message = error.message;
+      },
+    );
   }
 
   showAddImage() {
@@ -91,31 +92,26 @@ export class SingleGroupComponent implements OnInit {
   }
 
   get data() {
-    const fd = new FormData;
+    const fd = new FormData();
     if (this.file) {
       fd.append('file', this.file);
-
     }
     if (this.image) {
       fd.append('image', this.image);
-
     }
     fd.append('content', this.content.value);
     return fd;
   }
 
   addPost = (fd): void => {
-    this.singleGroupService
-      .addPost(this.groupId, fd)
-      .subscribe(
-        (post: any) => {
-          this.posts.unshift(post);
-          console.log(post);
-        },
-        (error) => {
-          throwError(error);
-        },
-      );
+    this.singleGroupService.addPost(this.groupId, fd).subscribe(
+      (post: any) => {
+        this.posts.unshift(post);
+      },
+      (error) => {
+        throwError(error);
+      },
+    );
   };
 
   leaveGroup = (id: number) => {
@@ -149,7 +145,7 @@ export class SingleGroupComponent implements OnInit {
           (response: any) => {
             this.posts = [...this.posts, ...response.results];
           },
-          (error) => console.log(error),
+          () => {},
         );
       }
     }
