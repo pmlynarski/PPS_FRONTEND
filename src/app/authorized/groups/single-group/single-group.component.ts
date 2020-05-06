@@ -84,11 +84,11 @@ export class SingleGroupComponent implements OnInit {
   }
 
   onImageSelected(event) {
-    this.image = <File>event.srcElement.files[0];
+    this.image = event.srcElement.files[0] as File;
   }
 
   onFileSelected(event) {
-    this.file = <File>event.srcElement.files[0];
+    this.file = event.srcElement.files[0] as File;
   }
 
   get data() {
