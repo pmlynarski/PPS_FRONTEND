@@ -24,6 +24,8 @@ import { SearchService } from './search/search.service';
 import { PendingListComponent } from './groups/pending-list/pending-list.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostDetailsService } from './post-details/post-details.service';
+import { ChatAppComponent } from './chat-app/chat-app.component';
+
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import { PostDetailsService } from './post-details/post-details.service';
     PostComponent,
     PendingListComponent,
     PostDetailsComponent,
+    ChatAppComponent,
   ],
   imports: [CommonModule, RouterModule, routing, FormsModule, ReactiveFormsModule],
   exports: [AuthorizedComponent],
