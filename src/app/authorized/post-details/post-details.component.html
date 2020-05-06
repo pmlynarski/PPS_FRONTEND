@@ -1,6 +1,6 @@
 <div class="container" *ngIf="post">
     <div class="header">
-        <div class="post__date">{{post.date_posted}}</div>
+        <div class="post__date">{{post.date_posted | date: "dd-MMM-yyyy hh-mm-ss"}}</div>
         <div class="post__credentials">
             <span class="post__group" [routerLink]="['/home/group', post.group.id]">
                 {{post.group.name}}
@@ -12,21 +12,30 @@
         </div>
     </div>
     <div class="post__content">
-        {{post.content}}
+        <div class="post__content__text">
+            {{post.content}}
+        </div>
+        <div class="post__files">
+            <div class="post__image" *ngIf="post.image">
+                <img [src]="'http://127.0.0.1:8000' + post.image">
+            </div>
+        </div>
     </div>
+   
     <div class="post__comments">
         <div class="comment__form">
             <form [formGroup]="commentForm" (ngSubmit)="addComment()">
               <textarea class="textarea" formControlName="content"></textarea>
+              <div class="bottom__form">
+                <input type='file' class="load-file" accept="image/*" style="color: white;" (change)="onFileSelected($event)">
                 <button type="submit" class="add-comment__button">Add comment</button>
+            </div>
             </form>
-            <input type='file' class="load-file" style="color: white;" (change)="onFileSelected($event)">
-
         </div>
         <div  class="comment" *ngFor="let comment of comments">
             <div class="comment__user">
-                <img src="../../../assets/img/default.png">
-                <div class="comment__date">{{comment.date_commented}}</div>
+                <img [src]="'http://127.0.0.1:8000' + comment.owner.image">
+                <div class="comment__date">{{comment.date_commented | date: "dd-MMM-yyyy hh-mm-ss"}}</div>
             </div>
               <div class="comment__credentials">
                 <div class="comment__header">
@@ -35,8 +44,10 @@
                 <div class="comment__content">
                     {{comment.content}}
                 </div>
-                <div class="file">
-                    {{comment.file}}
+                <div class="comment__files">
+                    <div class="comment__file" *ngIf="comment.file">
+                        <img [src]="'http://127.0.0.1:8000' + comment.file">
+                    </div>
                 </div>
             </div>
         </div>

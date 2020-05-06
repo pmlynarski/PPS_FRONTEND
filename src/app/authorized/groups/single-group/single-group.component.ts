@@ -21,6 +21,11 @@ export class SingleGroupComponent implements OnInit {
   private isGroupOwner: boolean;
   private postForm: FormGroup;
   private nextUrl: string;
+  private addImage: boolean;
+  private addFile: boolean;
+  image: File;
+  file: File;
+
 
   constructor(
     private singleGroupService: SingleGroupService,
@@ -28,6 +33,8 @@ export class SingleGroupComponent implements OnInit {
     private elRef: ElementRef,
     private router: Router,
   ) {
+    this.addImage = false;
+    this.addFile = false;
     this.isGroupOwner = false;
     this.postForm = new FormGroup({
       content: new FormControl('', Validators.required),
@@ -61,23 +68,49 @@ export class SingleGroupComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   get content() {
     return this.postForm.get('content');
   }
 
-  addPost = (): void => {
+  showAddImage() {
+    this.addImage = !this.addImage;
+  }
+
+  showAddFile() {
+    this.addFile = !this.addFile;
+  }
+
+  onImageSelected(event) {
+    this.image = <File>event.srcElement.files[0];
+  }
+
+  onFileSelected(event) {
+    this.file = <File>event.srcElement.files[0];
+  }
+
+  get data() {
+    const fd = new FormData;
+    if (this.file) {
+      fd.append('file', this.file);
+
+    }
+    if (this.image) {
+      fd.append('image', this.image);
+
+    }
+    fd.append('content', this.content.value);
+    return fd;
+  }
+
+  addPost = (fd): void => {
     this.singleGroupService
-      .addPost(this.groupId, { content: this.content.value })
-      .pipe(
-        finalize(() => {
-          this.postForm.reset();
-        }),
-      )
+      .addPost(this.groupId, fd)
       .subscribe(
         (post: any) => {
           this.posts.unshift(post);
+          console.log(post);
         },
         (error) => {
           throwError(error);

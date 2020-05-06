@@ -12,6 +12,6 @@
         <div class="post__date">{{ post.date_posted }}</div>
       </div>
       <div class="post__content" [routerLink]="['/home/post/' + post.id]">
-        {{ post.content }}
+        {{ post.content | slice:":200"}}
       </div>
 </div>

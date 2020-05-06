@@ -206,6 +206,12 @@ input::-webkit-file-upload-button{
         border:1px solid  rgb(94, 0, 138);
     }
 
+    .edit-image{
+        width: 40%;
+
+    }
+
+
     .edit-image-button:hover {
         cursor: pointer;
     }
