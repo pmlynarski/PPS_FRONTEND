@@ -55,36 +55,36 @@
       <form [formGroup]="postForm" (ngSubmit)="addPost(data)">
         <textarea class="textarea" formControlName="content"></textarea>
         <div class="bottom__form">
-          <div class="add-file-button" >
-            <img class="" src="../../../../assets/img/add-photo.png" (click)="showAddImage()"/>
-            <img class="" src="../../../../assets/img/upload.png" (click)="showAddFile()"/>
+          <div class="add-file-button">
+            <img class="" src="../../../../assets/img/add-photo.png" (click)="showAddImage()" />
+            <img class="" src="../../../../assets/img/upload.png" (click)="showAddFile()" />
           </div>
           <button type="submit" class="add-post__button">Add post</button>
-      </div>
+        </div>
       </form>
-      <div class="add-image" *ngIf="addImage" >
+      <div class="add-image" *ngIf="addImage">
         <div class="close-update">
-            <span (click)="showAddImage()" > X </span>
+          <span (click)="showAddImage()"> X </span>
         </div>
         <div class="upload-content">
-          <input type="file" accept="image/*" (change)="onImageSelected($event)" class="inputfile">
-          <button class="profile__button" (click)="showAddImage()"> Save</button>
-          <span class="message--error"> {{resultMessage}} </span>
+          <input type="file" accept="image/*" (change)="onImageSelected($event)" class="inputfile" />
+          <button class="profile__button" (click)="showAddImage()">Save</button>
+          <span class="message--error"> {{ message }} </span>
         </div>
       </div>
-      <div class="add-image" *ngIf="addFile" >
+      <div class="add-image" *ngIf="addFile">
         <div class="close-update">
-            <span (click)="showAddFile()" > X </span>
+          <span (click)="showAddFile()"> X </span>
         </div>
         <div class="upload-content">
-          <input type="file" (change)="onFileSelected($event)" class="inputfile">
+          <input type="file" (change)="onFileSelected($event)" class="inputfile" />
           <button class="profile__button" (click)="showAddFile()">Save</button>
-          <span class="message--error"> {{resultMessage}} </span>
+          <span class="message--error"> {{ message }} </span>
         </div>
       </div>
     </div>
     <div class="group__posts">
-      <app-post class="posts__post" *ngFor="let post of posts" [post]="post" [withGroup]="false"></app-post>
+      <app-post class="posts__post" *ngFor="let post of posts" [post]="post" [withGroup]="false" (refresh)="loadPosts()"></app-post>
     </div>
   </div>
 </div>

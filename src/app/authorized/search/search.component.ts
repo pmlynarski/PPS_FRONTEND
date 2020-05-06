@@ -23,8 +23,6 @@ export class SearchComponent {
         this.results = [...response.results];
         this.results = this.results.map(element => ({ ...element, membersCount: element.members.length }))
         this.nextUrl = response.next;
-        console.log(response);
-        console.log(this.nextUrl);
 
       },
       (error) => {
