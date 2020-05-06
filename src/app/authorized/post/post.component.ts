@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';
 
@@ -21,6 +21,8 @@ export class PostComponent implements OnInit {
   postEditing: boolean;
   postDeleting: boolean;
   editForm: FormGroup;
+  file: File;
+  image: File;
 
   constructor(
     private profileService: ProfileService,
@@ -35,7 +37,8 @@ export class PostComponent implements OnInit {
     this.postDeleting = false;
     this.editForm = new FormGroup({
       content: new FormControl('', Validators.required),
-      file: new FormControl(),
+      file: new FormControl(null),
+      image: new FormControl(null),
     });
   }
 
@@ -54,17 +57,24 @@ export class PostComponent implements OnInit {
     return this.editForm.get('content');
   }
 
-  get file() {
-    return this.editForm.get('file');
-  }
-
   get data() {
     const fd = new FormData();
     fd.append('content', this.content.value);
-    if (this.file.value) {
-      fd.append('file', this.file.value);
+    if (this.file) {
+      fd.append('file', this.file);
+    }
+    if (this.image) {
+      fd.append('image', this.image);
     }
     return fd;
+  }
+
+  fileChange($event) {
+    this.file = $event.target.files.item(0);
+  }
+
+  imageChange($event) {
+    this.image = $event.target.files.item(0);
   }
 
   editToggle() {
@@ -74,10 +84,10 @@ export class PostComponent implements OnInit {
 
   submitEdit() {
     this.postService.editPost(this.post.id, this.data).subscribe(
-      () => {
+      (res) => {
         this.postEditing = false;
         this.post.content = this.content.value;
-        this.post.file = this.file.value;
+        this.post.file = this.file;
       },
       (error) => throwError(error),
     );

@@ -23,7 +23,14 @@
         <label>
           <textarea class="form-group__input" formControlName="content"></textarea>
         </label>
-        <input type="file" formControlName="file" />
+        <label>
+          File:
+          <input type="file" (change)="fileChange($event)" formControlName="file" />
+        </label>
+        <label>
+          Image:
+          <input type="file" accept="image/*" (change)="imageChange($event)" formControlName="image" />
+        </label>
         <button type="submit">Save</button>
       </form>
     </ng-template>
