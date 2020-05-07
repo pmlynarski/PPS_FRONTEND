@@ -9,39 +9,10 @@
       <span class="post__group" *ngIf="withGroup" [routerLink]="['/home/group/' + post.group.id]">
         {{ post.group.name }}
       </span>
-      <div class="icons__wrapper">
-        <img src="../../../assets/img/editIcon.svg" alt="edit" class="icon" (click)="editToggle()" />
-        <img src="../../../assets/img/deleteIcon.svg" alt="edit" class="icon" (click)="toggleDeletePopup()" />
-      </div>
       <div class="post__date">{{ post.date_posted }}</div>
     </div>
-    <div *ngIf="!postEditing; else form" class="post__content" [routerLink]="['/home/post/' + post.id]">
+    <div class="post__content" [routerLink]="['/home/post/' + post.id]">
       {{ post.content | slice: 0:200 }}
-    </div>
-    <ng-template #form>
-      <form class="form-group" (ngSubmit)="submitEdit()" [formGroup]="editForm">
-        <label>
-          <textarea class="form-group__input" formControlName="content"></textarea>
-        </label>
-        <label>
-          File:
-          <input type="file" (change)="fileChange($event)" formControlName="file" />
-        </label>
-        <label>
-          Image:
-          <input type="file" accept="image/*" (change)="imageChange($event)" formControlName="image" />
-        </label>
-        <button type="submit">Save</button>
-      </form>
-    </ng-template>
-  </div>
-  <div *ngIf="postDeleting" class="confirmation">
-    <div class="caption__wrapper">
-      Are you sure about deleting this post?
-    </div>
-    <div class="button__wrapper">
-      <button class="approve" (click)="deletePost()">yes</button>
-      <button class="decline" (click)="toggleDeletePopup()">no</button>
     </div>
   </div>
 </div>
