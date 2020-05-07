@@ -11,6 +11,7 @@ import { SingleGroupComponent } from './groups/single-group/single-group.compone
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { ChatAppComponent } from './chat-app/chat-app.component';
 
 const routes: Routes = [
   {
@@ -24,11 +25,11 @@ const routes: Routes = [
       { path: 'group/:id/pending', component: PendingListComponent },
       { path: 'group/foreign/:id', component: ForeignGroupComponent },
       { path: 'search', component: SearchComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:id', component: ProfileComponent },
+      { path: 'profile/:id/chat', component: ChatAppComponent },
       { path: 'groups/create', component: AddGroupComponent },
       { path: '', redirectTo: 'posts', pathMatch: 'full' },
       { path: 'post/:id', component: PostDetailsComponent },
-
     ],
   },
 ];

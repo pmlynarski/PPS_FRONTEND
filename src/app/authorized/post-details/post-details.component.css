@@ -187,6 +187,7 @@
     width: 90%;
     border-radius: 25px;
     padding: 15px;
+    resize: none;
   }
 
   .bottom__form{

@@ -38,8 +38,11 @@ export class PostDetailsComponent implements OnInit {
   }
 
   get data() {
-    const fd = new FormData();
-    fd.append('file', this.file, this.file.name);
+    const fd = new FormData;
+    if (this.file) {
+      fd.append('file', this.file);
+
+    }
     fd.append('content', this.content.value);
     return fd;
   }
@@ -58,7 +61,7 @@ export class PostDetailsComponent implements OnInit {
 
   addComment(): void {
     this.postDetailsServer.addComment(this.postID, this.data).subscribe(
-      (res) => {
+      () => {
         this.postDetails(this.postID);
         this.commentForm.reset();
       },
