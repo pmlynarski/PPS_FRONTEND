@@ -15,9 +15,9 @@ export class ProfileService {
     this.credentialsUrl = urlData.host + 'users/user_details/';
   }
 
-  getUsersCredentials = (id): Observable<IUserData> => this.http.get<IUserData>(this.credentialsUrl + id + "/");
+  getUsersCredentials = (id): Observable<IUserData> => this.http.get<IUserData>(this.credentialsUrl + id + '/');
 
   sendUserData = (data): Observable<any> => this.http.put(this.editUrl, data);
-  
+
   getCurrentUser = (): Observable<any> => this.http.get(this.credentialsUrl);
 }

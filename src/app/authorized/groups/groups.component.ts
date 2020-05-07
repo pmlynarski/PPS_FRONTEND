@@ -25,7 +25,7 @@ export class GroupsComponent {
     );
   }
 
-  showNewGroupForm(){
+  showNewGroupForm() {
     this.newGroupFormVisible = !this.newGroupFormVisible;
   }
 }

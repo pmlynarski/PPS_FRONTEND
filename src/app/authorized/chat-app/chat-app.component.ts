@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatAppService } from './chat-app.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IUserData } from 'src/app/core/interfaces/user.interfaces';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ChatAppService } from './chat-app.service';
 
 @Component({
   selector: 'app-chat-app',
@@ -21,56 +21,56 @@ export class ChatAppComponent implements OnInit {
     this.getChat();
     this.messageForm = new FormGroup({
       message: new FormControl('', Validators.required)
-    })
+    });
    }
 
   ngOnInit() {
   }
 
-get message(){
+get message() {
   return this.messageForm.get('message');
 }
 
-get data(){
+get data() {
   return {
     message: this.message.value,
     sender: this.sender.id,
     receiver: this.receiver.id
-  }
+  };
 }
 
-  getChat(){
+  getChat() {
     this.chatAppService.getChat(this.receiverID).subscribe(
       (response) => {
-        this.messages = response['messages'];
-        this.receiver = response['receiver'];
-        this.sender = response['sender'];
+        this.messages = response.messages;
+        this.receiver = response.receiver;
+        this.sender = response.sender;
         this.messages = this.isSender();
       },
       (error) => {
-        console.log(error)
+        console.log(error);
 
       }
-    )
+    );
   }
 
-  isSender(){
+  isSender() {
     return this.messages.map(message => {
-      if(message.receiver.id === this.receiverID){
+      if (message.receiver.id === this.receiverID) {
         return {
           ...message,
           isMine: false
-        }
+        };
       } else {
         return {
           ...message,
           isMine: true
-        }
+        };
       }
-    })
+    });
   }
 
-  sendMessage(){
+  sendMessage() {
     this.chatAppService.sendMessage(this.data).subscribe(
       () => {
         this.getChat();
@@ -79,7 +79,7 @@ get data(){
       (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
 }
