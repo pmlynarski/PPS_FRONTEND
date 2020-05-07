@@ -6,6 +6,7 @@ import config, { default as configData } from 'src/app/core/config.js';
 import { IUserData } from '../../core/interfaces/user.interfaces';
 import { equalityValidator } from '../../homepage/register/equality.validator';
 import { ProfileService } from './profile.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -23,10 +24,13 @@ export class ProfileComponent {
   private readonly regExp: string;
   private editImage: boolean;
   image: File;
+  private userID: number;
+  private editable: boolean;
 
-  constructor(private profileService: ProfileService) {
+
+  constructor(private profileService: ProfileService, private activatedRoute: ActivatedRoute) {
     this.editImage = false;
-
+    this.userID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.regExp = configData.passwordRegEx;
     this.getUserCredentials();
     this.changePasswordForm = new FormGroup({
@@ -37,6 +41,7 @@ export class ProfileComponent {
     this.lastNameField = false;
     this.emailField = false;
     this.passwordChange = false;
+    this.profileService.getCurrentUser().subscribe(res => this.editable = res.id === this.userID ? true : false);
   }
 
   get password(): AbstractControl {
@@ -48,13 +53,16 @@ export class ProfileComponent {
   }
 
   getUserCredentials(): void {
-    this.profileService.getUsersCredentials().subscribe((response) => {
+    this.profileService.getUsersCredentials(this.userID).subscribe((response) => {
       this.user = response;
     });
   }
 
   editFirstName(): void {
-    this.firstNameField = !this.firstNameField;
+    if( this.editable) {
+      this.firstNameField = !this.firstNameField;
+    }
+    
   }
 
   sendFirstName(): void {
@@ -70,7 +78,9 @@ export class ProfileComponent {
   }
 
   editLastName(): void {
-    this.lastNameField = !this.lastNameField;
+    if( this.editable) {
+      this.lastNameField = !this.lastNameField;
+    }
   }
 
   sendLastName(): void {
@@ -86,7 +96,9 @@ export class ProfileComponent {
   }
 
   editEmail(): void {
-    this.emailField = !this.emailField;
+    if( this.editable) {
+      this.emailField = !this.emailField;
+    }
   }
 
   sendEmail(): void {

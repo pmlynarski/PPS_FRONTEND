@@ -7,7 +7,7 @@
             </span>
             <div class="post__user">
                 <span>{{post.owner.first_name}} {{post.owner.last_name}}</span>
-                <img [src]="'http://127.0.0.1:8000' + post.owner.image">
+                <img [src]="'http://127.0.0.1:8000' + post.owner.image" [routerLink]="['/home/profile/' + post.owner.id]">
             </div>
         </div>
     </div>

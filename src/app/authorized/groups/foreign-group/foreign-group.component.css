@@ -4,6 +4,7 @@
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 9vh min-content;
     margin: 0 auto;
+    color: rgb(94, 0, 138);
 
 }
 
@@ -23,6 +24,10 @@
 .button--red {
     height: 40px;
     width: 80px;
+}
+
+button{
+    cursor: pointer;
 }
 
 .group__content {
@@ -103,6 +108,23 @@
 @media only screen and (min-width: 768px) {
     .container {
         width: 60%;
+    }
+
+    .yes__button, .cancel_button{
+        width: 75px;
+        height: 45px;
+    }
+
+    .yes__button:hover{
+        color: white;
+        background-color: rgb(94, 0, 138);
+    }
+
+    .cancel_button:hover{
+        background-color: white;
+        color: rgb(94, 0, 138);
+        border: 1px solid rgb(94, 0, 138);
+
     }
   
   }

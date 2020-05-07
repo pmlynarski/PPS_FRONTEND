@@ -23,33 +23,42 @@
   </div>
   <div class="group__content">
     <div class="group__info">
-      <div class="group__name">
-        <span class="name__label text--strong">
-          Name:
-        </span>
-        <span class="name__value">
-          {{ group.name }}
-        </span>
+      <div class="goup_name_owner_info">
+        <div class="group__name">
+          <span class="name__label text--strong">
+            Name:
+          </span>
+          <span class="name__value">
+            {{ group.name }}
+          </span>
+        </div>
+        <div class="group__members" (click) = "showMembers()">
+          <span class="members__label text--strong" >
+            Members:
+          </span>
+          <span class="members__value">
+            {{ group.membersCount }}
+          </span>
+        </div>
       </div>
-      <div class="group__owner">
-        <span class="owner__label text--strong">
-          Owner:
-        </span>
-        <span class="owner__value"> {{ group.owner.first_name }} {{ group.owner.last_name }} </span>
-      </div>
-      <div class="group__members">
-        <span class="members__label text--strong">
-          Members:
-        </span>
-        <span class="members__value">
-          {{ group.membersCount }}
-        </span>
-      </div>
-      <div class="pending-members__link">
-        <span class="text--link text--strong" [routerLink]="['/home/group/' + groupId + '/pending']" *ngIf="isGroupOwner">
-          Pending members
-        </span>
-      </div>
+      <div class="members_info">
+        <div class="group__owner">
+          <span class="owner__label text--strong">
+            Owner:
+          </span>
+          <span class="owner__value"> {{ group.owner.first_name }} {{ group.owner.last_name }} </span>
+        </div>
+        <div class="pending-members__link">
+          <span class="text--link text--strong" [routerLink]="['/home/group/' + groupId + '/pending']" *ngIf="isGroupOwner">
+            Pending members
+          </span>
+        </div>
+    </div>
+    </div>
+    <div class="group__all__members" *ngIf="showGroupMembers">
+      <span *ngFor="let member of groupMembers" [routerLink]="['/home/profile/' + member.id]" >
+        {{member.first_name}}   {{member.last_name}}
+      </span>
     </div>
     <div class="post__form">
       <form [formGroup]="postForm" (ngSubmit)="addPost(data)">
@@ -64,7 +73,7 @@
       </form>
       <div class="add-image" *ngIf="addImage">
         <div class="close-update">
-          <span (click)="showAddImage()"> X </span>
+          <span (click)="showAddImage()"></span>
         </div>
         <div class="upload-content">
           <input type="file" accept="image/*" (change)="onImageSelected($event)" class="inputfile" />
@@ -74,7 +83,7 @@
       </div>
       <div class="add-image" *ngIf="addFile">
         <div class="close-update">
-          <span (click)="showAddFile()"> X </span>
+          <span (click)="showAddFile()"></span>
         </div>
         <div class="upload-content">
           <input type="file" (change)="onFileSelected($event)" class="inputfile" />

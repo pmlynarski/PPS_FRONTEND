@@ -1,1 +1,20 @@
-<p>chat-app works!</p>
+<div class="container" *ngIf="receiver">
+    <div class="messages__reciever">
+        <img [src]="'http://127.0.0.1:8000' + receiver.image" />
+        <span> {{receiver.first_name}} {{receiver.last_name}}</span>
+    </div>
+    <div class="messages">
+        <div class="message" [ngClass]="{'receiever': message.isMine}" *ngFor="let message of messages">
+            <div class="message__header">
+                <span>{{message.timestamp | date: "dd-MM-yyyy hh-mm-ss"}}</span>
+            </div>
+            {{message.message}}
+        </div>
+    </div>
+    <div class="message__form">
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+            <button type="submit">Send</button>
+            <textarea formControlName="message"> </textarea>
+        </form>
+    </div>
+</div>

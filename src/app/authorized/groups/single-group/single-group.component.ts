@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { IGroupFull } from '../../../core/interfaces/groups.interfaces';
 import { IPost } from '../../../core/interfaces/posts.interfaces';
 import { SingleGroupService } from './single-group.service';
+import { IUserData } from 'src/app/core/interfaces/user.interfaces';
 
 @Component({
   selector: 'app-single-group',
@@ -22,6 +23,8 @@ export class SingleGroupComponent implements OnInit {
   private nextUrl: string;
   private addImage: boolean;
   private addFile: boolean;
+  private showGroupMembers: boolean;
+  private groupMembers: IUserData[];
   image: File;
   file: File;
 
@@ -31,6 +34,7 @@ export class SingleGroupComponent implements OnInit {
     private elRef: ElementRef,
     private router: Router,
   ) {
+    this.showGroupMembers = false;
     this.addImage = false;
     this.addFile = false;
     this.isGroupOwner = false;
@@ -75,6 +79,18 @@ export class SingleGroupComponent implements OnInit {
     );
   }
 
+  showMembers(){
+    this.showGroupMembers = !this.showGroupMembers;
+    this.singleGroupService.getGropuMembers(this.groupId).subscribe(
+      (response) => {
+        this.groupMembers = response;
+      },
+      () => {
+
+      }
+    )
+  }
+
   showAddImage() {
     this.addImage = !this.addImage;
   }
@@ -107,6 +123,7 @@ export class SingleGroupComponent implements OnInit {
     this.singleGroupService.addPost(this.groupId, fd).subscribe(
       (post: any) => {
         this.posts.unshift(post);
+        this.postForm.reset();
       },
       (error) => {
         throwError(error);

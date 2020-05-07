@@ -43,7 +43,7 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getUsersCredentials().subscribe(
+    this.profileService.getCurrentUser().subscribe(
       (res) => {
         this.isOwner = res.email === this.post.owner.email;
       },

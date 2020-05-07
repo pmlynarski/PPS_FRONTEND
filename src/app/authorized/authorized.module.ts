@@ -25,6 +25,7 @@ import { PendingListComponent } from './groups/pending-list/pending-list.compone
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostDetailsService } from './post-details/post-details.service';
 import { ChatAppComponent } from './chat-app/chat-app.component';
+import { ChatAppService } from './chat-app/chat-app.service';
 
 
 
@@ -54,6 +55,7 @@ import { ChatAppComponent } from './chat-app/chat-app.component';
     ProfileService,
     ForeignGroupService,
     PostDetailsService,
+    ChatAppService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

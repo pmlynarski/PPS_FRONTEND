@@ -43,6 +43,13 @@
     border:1px solid  rgb(94, 0, 138);
     background-color: white;
     cursor: pointer;
+    color: rgb(94, 0, 138);
+    box-shadow: none;
+}
+
+.search__button:hover{
+    background-color:rgb(94, 0, 138) !important;
+    color: white !important;
 }
 
 .errors {
@@ -69,6 +76,7 @@
     color: white;
     padding: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) {

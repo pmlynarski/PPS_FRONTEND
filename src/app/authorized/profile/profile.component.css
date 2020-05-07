@@ -16,9 +16,15 @@
     justify-content: center;
     align-items: center;
     color: white;
-    padding: 45px 0 25px 15px;
-    padding: 25px;
+    padding-top: 25px;
 }
+
+.message__icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
 .header span{
     padding-top:15px;
 }
@@ -26,7 +32,8 @@
 .profile-image{
     display: flex;
     justify-content: left;
-
+    width: 150px;
+    height: 150px;
 }
 
 .profile-image img{
@@ -142,7 +149,8 @@ input::-webkit-file-upload-button{
     background-color: white;
     display: flex;
     flex-direction: column;
-        border:1px solid  rgb(94, 0, 138);
+    border:1px solid  rgb(94, 0, 138);
+    justify-content: center;
 
 }
 .close-update{
