@@ -1,12 +1,21 @@
 .container {
   display: grid;
   grid-template-areas: '. header .' '. posts .';
-  grid-template-columns: 10% 80% 10%;
+  grid-template-columns: 5% 90% 5%;
   grid-template-rows: 8vh min-content;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
+  background-color: white;
+  color: rgb(94, 0, 138);
+  background-image: url("../../../assets/img/tło3.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0 auto;
 }
 
 .header {
+  font-size: 21px;
+
   align-items: center;
   display: flex;
   grid-area: header;
@@ -23,7 +32,15 @@
   grid-area: posts;
   justify-content: center;
   width: 100%;
+  
 }
 .post {
   width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+      width: 60%;
+      background-image: url("../../../assets/img/tło2.png");
+  }
 }

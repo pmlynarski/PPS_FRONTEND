@@ -10,6 +10,8 @@ import { GroupsService } from './groups.service';
 export class GroupsComponent {
   private message: string;
   private groups: IGroupFull[];
+  newGroupFormVisible: boolean;
+
 
   constructor(private groupsService: GroupsService) {
     this.groupsService.getUsersGroups().subscribe(
@@ -21,5 +23,9 @@ export class GroupsComponent {
         this.message = error.error.message;
       },
     );
+  }
+
+  showNewGroupForm(){
+    this.newGroupFormVisible = !this.newGroupFormVisible;
   }
 }

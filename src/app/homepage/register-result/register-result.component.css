@@ -1,6 +1,6 @@
 .box {
-    background-color: #DCE2E8;
-    border: 1px grey solid;
+    background-color: white;
+    border: 1px rgb(94, 0, 138) solid;
     border-radius: 15px;
     height: fit-content;
     left: 50%;
@@ -9,33 +9,37 @@
     transform: translate(-50%, -50%);
     width: 80vw;
     z-index: 2;
-
-}
-
-.leave {
-    background: none;
-    border: none;
-    display: block;
-    position: fixed;
-    right: 25px;
-    top: 25px;
-    transform: scale(2);
-}
-
-.leave:hover {
-    color: black;
-    cursor: pointer;
+    color: rgb(94, 0, 138);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
     font-family: 'Raleway-Bold';
     font-size: 35px;
-    margin: 25px;
+    padding: 10px;
     text-align: center;
 }
 .content{
     font-family: 'Raleway-Regular';
     font-size: 20px;
-    margin:25px;
-    text-align:justify;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+span{
+    text-align: center;
+}
+
+button{
+    background-color: rgb(94, 0, 138);
+    color: white;
+    width: 60px;
+    height: 30px;
+    margin-bottom: 15px;
 }

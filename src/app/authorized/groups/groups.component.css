@@ -1,14 +1,17 @@
 .container {
     display: grid;
     grid-template-areas: ". header ." ". group-add ." ". groups .";
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 5% 90% 5%;
     grid-template-rows: 8vh min-content min-content;
+    margin: 0 auto;
 }
 
 .header {
     align-items: center;
+    font-size: 21px;
     display: flex;
     grid-area: header;
+    color: rgb(94, 0, 138);
 }
 
 .errors {
@@ -20,9 +23,22 @@
     padding: 10px 0 10px 0;
 }
 
+
 .group__add .add__button {
     height: 40px;
     padding: 5px;
+    background-color:white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.group__add .add__button img{
+    width: 35px;
+    height: 30px;
+    padding-left: 5px;
 }
 
 .groups {
@@ -34,13 +50,43 @@
 }
 
 .groups_group {
-    align-items: center;
-    background-color: white;
+    align-items: left;
     border-radius: 15px;
     display: flex;
-    flex-direction: column;
-    height: 100px;
-    justify-content: center;
-    margin: 15px 0 15px 0;
-    width: 100%;
+    flex-direction: row;
+    margin-bottom: 25px;
+    background-color:rgb(94, 0, 138);
+    color: white;
+    padding: 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    cursor: pointer;
 }
+
+.content{
+    padding-right: 15px;
+    width: 85%;
+}
+
+.check__group__icon {
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}
+
+.check__group__icon img{
+    width: 40px;
+    height: 45px;
+}
+
+.input__label{
+    font-weight: 600;
+    padding-right: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 60%;
+    }
+
+  }

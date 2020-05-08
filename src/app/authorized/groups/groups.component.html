@@ -8,15 +8,25 @@
     </div>
   </div>
   <div class="group__add">
-    <button class="button--green add__button" [routerLink]="['/home/groups/add']">Create group!</button>
+    <button class="add__button" (click)="showNewGroupForm()">
+      <span>Create new group</span>
+      <img src="../../../assets/img/Plus Sign-64x64"/>
+    </button>
   </div>
   <div class="groups">
     <div *ngFor="let group of groups" class="groups_group" [routerLink]="['/home/group', group.id]">
-      <div class="group__name"><span class="name__label text--strong">Name: </span>{{ group.name }}</div>
-      <div class="group__owner">
-        <span class="owner__label text--strong">Owner: </span>{{ group.owner.first_name }} {{ group.owner.last_name }}
+      <div class="content">
+        <div class="group__name"><span class="input__label">Name: </span>{{ group.name }}</div>
+        <div class="group__owner">
+          <span class="input__label">Owner: </span>{{ group.owner.first_name }} {{ group.owner.last_name }}
+        </div>
+        <div class="group__members-count"><span class="input__label">Members: </span>{{ group.membersCount }}</div>
       </div>
-      <div class="group__members-count"><span class="members__label text--strong">Members: </span>{{ group.membersCount }}</div>
+      <div class="check__group__icon">
+        <img src="../../../assets/img/click.png">
+      </div>
     </div>
   </div>
+  <app-add-group *ngIf="newGroupFormVisible" (setHidden)="showNewGroupForm(false)"></app-add-group>
 </div>
+

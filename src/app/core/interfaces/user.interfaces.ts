@@ -11,7 +11,9 @@ export interface IRegisterData {
 }
 
 export interface IUserData {
+  image: string;
   email: string;
   first_name: string;
   last_name: string;
+  id?: number;
 }

@@ -1,3 +1,10 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+
+}
+
 .hamburger {
     align-items: center;
     background: transparent;
@@ -38,10 +45,13 @@
 
 .hamburger--active .hamburger__inner::before {
     transform: translateY(10px) rotate(45deg);
+    background-color: white;
 }
 
 .hamburger--active .hamburger__inner::after {
     transform: translateY(-10px) rotate(-45deg);
+    background-color: white;
+
 }
 
 .hamburger__inner::before,
@@ -66,7 +76,8 @@
 }
 
 .nav {
-    background-color: #B5B8BB;
+    background-color: rgba(94, 0, 138, 1);
+    color: white;
     display: grid;
     font-size: 35px;
     grid-template-areas: "." "home" "groups" "search" "profile" "logout" ".";
@@ -115,3 +126,36 @@
 .nav__item--logout {
     grid-area: logout;
 }
+
+
+@media only screen and (min-width: 768px) {
+    .nav {
+        position: static;
+        background-color: rgba(94, 0, 138, 1);
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        font-size: 25px;
+        width: 60%;
+        height: 60px;
+        left: 0;
+        top: 0;
+        transform: translateX(0);
+        margin: 0 auto;
+        font-size: 21px;
+    }
+    .hamburger {
+        display: none;
+    }
+
+    .nav__item{
+        width: 20%;
+    }
+
+    .nav__item:hover{
+        background-color: white;
+        color: rgb(94, 0, 138, 1);
+        cursor: pointer;
+    }
+  
+  }

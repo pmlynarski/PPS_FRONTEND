@@ -1,15 +1,25 @@
 .container {
     height: 100vh;
     width: 100%;
+    background-color:rgb(94, 0, 138);
+    background-image: url("../../assets/img/message2.png");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+
 }
 
 nav {
     display: flex;
-    font-size: 21px;
-    height: 10vh;
+    font-size: 20px;
+    height: 8vh;
     justify-content: space-between;
-    padding: 15px;
+    align-items: center;
+    padding: 10px 40px 10px;
     width: 100%;
+    background-color: white;
+    color:rgb(89, 1, 148);
+
 }
 
 .navigation__item {
@@ -23,16 +33,16 @@ nav {
 }
 
 .content__wrapper {
-    background-color: white;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 50% 50%;
     height: 156px;
     left: 0%;
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     width: 100%;
+    color:white;
 }
 
 .content__header,
@@ -43,12 +53,21 @@ nav {
 }
 
 .content__header {
-    font-size: 32px;
+    font-size: 55px;
     font-weight: 700;
     text-align: center;
 }
 
 .content__description {
-    font-size: 24px;
+    font-size: 35px;
     text-align: center;
+    opacity: .8;
+
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 60%;
+    }
+
 }

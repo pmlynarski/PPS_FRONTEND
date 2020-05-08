@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/homepage/login/login.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,6 +12,7 @@ import { LoginService } from 'src/app/homepage/login/login.service';
 export class NavigationComponent {
   constructor(
     private loginService: LoginService,
+    private profileService: ProfileService,
     private router: Router,
     private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document,
@@ -33,7 +35,7 @@ export class NavigationComponent {
 
   navigateToProfile() {
     this.changeHamburgerState();
-    this.router.navigate(['profile'], { relativeTo: this.route });
+    this.profileService.getCurrentUser().subscribe(res => this.router.navigate([`profile/${res.id}`], { relativeTo: this.route }));
   }
 
   changeHamburgerState = () => {

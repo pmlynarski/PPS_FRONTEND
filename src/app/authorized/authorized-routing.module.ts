@@ -6,9 +6,12 @@ import { AuthorizedComponent } from './authorized.component';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { ForeignGroupComponent } from './groups/foreign-group/foreign-group.component';
 import { GroupsComponent } from './groups/groups.component';
+import { PendingListComponent } from './groups/pending-list/pending-list.component';
 import { SingleGroupComponent } from './groups/single-group/single-group.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
+import { ChatAppComponent } from './chat-app/chat-app.component';
 
 const routes: Routes = [
   {
@@ -18,13 +21,15 @@ const routes: Routes = [
     children: [
       { path: 'posts', component: AllPostsComponent },
       { path: 'groups', component: GroupsComponent },
-      { path: 'groups/add', component: AddGroupComponent },
       { path: 'group/:id', component: SingleGroupComponent },
+      { path: 'group/:id/pending', component: PendingListComponent },
       { path: 'group/foreign/:id', component: ForeignGroupComponent },
       { path: 'search', component: SearchComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:id', component: ProfileComponent },
+      { path: 'profile/:id/chat', component: ChatAppComponent },
       { path: 'groups/create', component: AddGroupComponent },
       { path: '', redirectTo: 'posts', pathMatch: 'full' },
+      { path: 'post/:id', component: PostDetailsComponent },
     ],
   },
 ];

@@ -14,10 +14,14 @@ export class AllPostsComponent {
   private message: string;
 
   constructor(private allPostsService: AllPostsService) {
+    this.loadPosts();
+  }
+
+  loadPosts() {
     this.allPostsService.getUsersPosts().subscribe(
       (response: any) => {
         this.message = undefined;
-        this.posts = [...response.results];
+        this.posts = response.results;
         this.nextUrl = response.next;
       },
       (error) => {

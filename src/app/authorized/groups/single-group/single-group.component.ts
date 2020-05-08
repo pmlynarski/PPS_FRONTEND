@@ -2,11 +2,11 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 import { IGroupFull } from '../../../core/interfaces/groups.interfaces';
 import { IPost } from '../../../core/interfaces/posts.interfaces';
 import { SingleGroupService } from './single-group.service';
+import { IUserData } from 'src/app/core/interfaces/user.interfaces';
 
 @Component({
   selector: 'app-single-group',
@@ -21,6 +21,12 @@ export class SingleGroupComponent implements OnInit {
   private isGroupOwner: boolean;
   private postForm: FormGroup;
   private nextUrl: string;
+  private addImage: boolean;
+  private addFile: boolean;
+  private showGroupMembers: boolean;
+  private groupMembers: IUserData[];
+  image: File;
+  file: File;
 
   constructor(
     private singleGroupService: SingleGroupService,
@@ -28,6 +34,9 @@ export class SingleGroupComponent implements OnInit {
     private elRef: ElementRef,
     private router: Router,
   ) {
+    this.showGroupMembers = false;
+    this.addImage = false;
+    this.addFile = false;
     this.isGroupOwner = false;
     this.postForm = new FormGroup({
       content: new FormControl('', Validators.required),
@@ -41,16 +50,7 @@ export class SingleGroupComponent implements OnInit {
         this.router.navigate(['/home/groups']);
       },
     );
-    this.singleGroupService.getGroupPosts(this.groupId).subscribe(
-      (response) => {
-        this.posts = [...response.results];
-        this.nextUrl = response.next;
-      },
-      (error) => {
-        console.log(error);
-        this.message = error.message;
-      },
-    );
+    this.loadPosts();
     this.singleGroupService.isGroupOwner(this.groupId).subscribe(
       () => {
         this.isGroupOwner = true;
@@ -67,22 +67,68 @@ export class SingleGroupComponent implements OnInit {
     return this.postForm.get('content');
   }
 
-  addPost = (): void => {
-    this.singleGroupService
-      .addPost(this.groupId, { content: this.content.value })
-      .pipe(
-        finalize(() => {
-          this.postForm.reset();
-        }),
-      )
-      .subscribe(
-        (post: any) => {
-          this.posts.unshift(post);
-        },
-        (error) => {
-          throwError(error);
-        },
-      );
+  loadPosts() {
+    this.singleGroupService.getGroupPosts(this.groupId).subscribe(
+      (response) => {
+        this.posts = response.results;
+        this.nextUrl = response.next;
+      },
+      (error) => {
+        this.message = error.message;
+      },
+    );
+  }
+
+  showMembers(){
+    this.showGroupMembers = !this.showGroupMembers;
+    this.singleGroupService.getGropuMembers(this.groupId).subscribe(
+      (response) => {
+        this.groupMembers = response;
+      },
+      () => {
+
+      }
+    )
+  }
+
+  showAddImage() {
+    this.addImage = !this.addImage;
+  }
+
+  showAddFile() {
+    this.addFile = !this.addFile;
+  }
+
+  onImageSelected(event) {
+    this.image = event.srcElement.files[0] as File;
+  }
+
+  onFileSelected(event) {
+    this.file = event.srcElement.files[0] as File;
+  }
+
+  get data() {
+    const fd = new FormData();
+    if (this.file) {
+      fd.append('file', this.file);
+    }
+    if (this.image) {
+      fd.append('image', this.image);
+    }
+    fd.append('content', this.content.value);
+    return fd;
+  }
+
+  addPost = (fd): void => {
+    this.singleGroupService.addPost(this.groupId, fd).subscribe(
+      (post: any) => {
+        this.posts.unshift(post);
+        this.postForm.reset();
+      },
+      (error) => {
+        throwError(error);
+      },
+    );
   };
 
   leaveGroup = (id: number) => {
@@ -116,7 +162,7 @@ export class SingleGroupComponent implements OnInit {
           (response: any) => {
             this.posts = [...this.posts, ...response.results];
           },
-          (error) => console.log(error),
+          () => {},
         );
       }
     }

@@ -1,7 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { throwError } from 'rxjs';
 
 import { IPost } from '../../core/interfaces/posts.interfaces';
+import { PostDetailsService } from '../post-details/post-details.service';
 import { ProfileService } from '../profile/profile.service';
 
 @Component({
@@ -12,17 +15,35 @@ import { ProfileService } from '../profile/profile.service';
 export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() withGroup: boolean;
-  private isOwner: boolean;
-  private classObj: { active: boolean };
+  @Output() refresh: EventEmitter<void>;
+  isOwner: boolean;
+  classObj: { active: boolean };
+  postEditing: boolean;
+  postDeleting: boolean;
+  editForm: FormGroup;
+  file: File;
+  image: File;
 
-  constructor(private profileService: ProfileService, @Inject(DOCUMENT) private document: Document) {
+  constructor(
+    private profileService: ProfileService,
+    @Inject(DOCUMENT) private document: Document,
+    private postService: PostDetailsService,
+  ) {
+    this.refresh = new EventEmitter<void>();
     this.classObj = {
       active: false,
     };
+    this.postEditing = false;
+    this.postDeleting = false;
+    this.editForm = new FormGroup({
+      content: new FormControl('', Validators.required),
+      file: new FormControl(null),
+      image: new FormControl(null),
+    });
   }
 
   ngOnInit(): void {
-    this.profileService.getUsersCredentials().subscribe(
+    this.profileService.getCurrentUser().subscribe(
       (res) => {
         this.isOwner = res.email === this.post.owner.email;
       },
@@ -32,12 +53,53 @@ export class PostComponent implements OnInit {
     );
   }
 
-  showMenu($event: Event) {
-    $event.stopPropagation();
-    this.classObj = { active: true };
+  get content() {
+    return this.editForm.get('content');
   }
 
-  @HostListener('window:click') deactivate() {
-    this.classObj = { active: false };
+  get data() {
+    const fd = new FormData();
+    fd.append('content', this.content.value);
+    if (this.file) {
+      fd.append('file', this.file);
+    }
+    if (this.image) {
+      fd.append('image', this.image);
+    }
+    return fd;
+  }
+
+  fileChange($event) {
+    this.file = $event.target.files.item(0);
+  }
+
+  imageChange($event) {
+    this.image = $event.target.files.item(0);
+  }
+
+  editToggle() {
+    this.content.setValue(this.post.content);
+    this.postEditing = !this.postEditing;
+  }
+
+  submitEdit() {
+    this.postService.editPost(this.post.id, this.data).subscribe(
+      (res) => {
+        this.postEditing = false;
+        this.post.content = this.content.value;
+        this.post.file = this.file;
+      },
+      (error) => throwError(error),
+    );
+  }
+
+  toggleDeletePopup() {
+    this.postDeleting = !this.postDeleting;
+  }
+
+  deletePost() {
+    this.postService.deletePost(this.post.id).subscribe(() => {
+      this.refresh.emit();
+    });
   }
 }

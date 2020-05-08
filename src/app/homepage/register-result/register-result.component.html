@@ -1,9 +1,10 @@
 <div class="box">
-  <button class="leave" (click)="this.hideRegisterInfo.emit()">X</button>
   <div class="header">
     <p>Congratulations</p>
   </div>
   <div class="content">
-    You have successfully created you account! You can log in now.
+    <span>You have successfully created you account. </span>
+    <span>You can log in now!</span>
   </div>
+  <button class="leave" (click)="this.hideRegisterInfo.emit()">OK</button>
 </div>

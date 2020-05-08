@@ -12,6 +12,11 @@ import { IGroupFull } from '../../../core/interfaces/groups.interfaces';
 export class SingleGroupService {
   constructor(private http: HttpClient) {}
 
+  getGropuMembers: any = (id: number) => {
+    const url = urlData.host + `groups/${id}/members/`;
+    return this.http.post(url, {});
+  } 
+
   getGroupData(id: number): Observable<IGroupFull> {
     const url = urlData.host + `groups/${id}/`;
     return this.http.get(url).pipe(map((response: any) => ({ ...response, membersCount: response.members.length })));
