@@ -1,9 +1,9 @@
 <div class="container" *ngIf="post">
   <div class="header">
-    <div class="post__date">{{ post.date_posted | date: 'dd-MMM-yyyy hh-mm-ss' }}</div>
-    <div class="icons__wrapper">
-      <img src="../../../assets/img/editIcon.svg" alt="edit" class="icon" (click)="editToggle()" />
-      <img src="../../../assets/img/deleteIcon.svg" alt="edit" class="icon" (click)="toggleDeletePopup()" />
+    <div class="post__date">{{ post.date_posted | date: 'dd MMM yyyy HH:mm' }}</div>
+    <div *ngIf="editable" class="icons__wrapper">
+      <img (click)="editToggle()" alt="edit" class="icon" src="../../../assets/img/editIcon.svg"/>
+      <img (click)="toggleDeletePopup()" alt="edit" class="icon" src="../../../assets/img/deleteIcon.svg"/>
     </div>
     <div class="post__credentials">
       <span class="post__group" [routerLink]="['/home/group', post.group.id]">
@@ -11,7 +11,7 @@
       </span>
       <div class="post__user">
         <span>{{ post.owner.first_name }} {{ post.owner.last_name }}</span>
-        <img [routerLink]="['/home/profile/' + post.owner.id]" [src]="'http://127.0.0.1:8000' + post.owner.image"
+        <img [routerLink]="['/home/profile/' + post.owner.id]" [src]="post.owner.image"
              alt="profile image"/>
       </div>
     </div>
@@ -22,7 +22,10 @@
     </div>
     <div class="post__files">
       <div class="post__image" *ngIf="post.image">
-        <img [src]="'http://127.0.0.1:8000' + post.image" alt="profile image"/>
+        <img [src]="post.image" alt="profile image"/>
+      </div>
+      <div *ngIf="post.file" class="post__file">
+        <a [href]="post.file">Download attachment</a>
       </div>
     </div>
   </div>
@@ -61,7 +64,7 @@
           <textarea class="textarea" formControlName="content"></textarea>
         </label>
         <div class="bottom__form">
-          <input (change)="onFileSelected($event)" accept="image/*" class="load-file" style="color: white;"
+          <input (change)="onFileSelected($event)" accept="image/*" class="load-file"
                  type="file"/>
           <button type="submit" class="add-comment__button">Add comment</button>
         </div>

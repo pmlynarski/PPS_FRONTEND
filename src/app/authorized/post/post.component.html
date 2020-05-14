@@ -1,6 +1,6 @@
 <div class="container">
   <div class="post__user">
-    <img [src]="'http://127.0.0.1:8000' + post.owner.image" [routerLink]="['/home/profile/' + post.owner.id]"/>
+    <img [routerLink]="['/home/profile/' + post.owner.id]" [src]="post.owner.image"/>
     <span>{{ post.owner.first_name }} </span>
     <span>{{ post.owner.last_name }} </span>
   </div>
@@ -13,6 +13,9 @@
     </div>
     <div class="post__content" [routerLink]="['/home/post/' + post.id]">
       {{ post.content | slice: 0:200 }}
+    </div>
+    <div *ngIf="post.file" class="post__file">
+      <a [href]="post.file">Download attachment</a>
     </div>
   </div>
 </div>

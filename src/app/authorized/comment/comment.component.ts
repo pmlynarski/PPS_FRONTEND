@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IComment } from '../../core/interfaces/comment.interfaces';
 import { PostDetailsService } from '../post-details/post-details.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-comment',
@@ -15,8 +16,9 @@ export class CommentComponent implements OnInit {
   commentDeleting: boolean;
   file: File;
   editCommentForm: FormGroup;
+  editable: boolean;
 
-  constructor(private postService: PostDetailsService) {
+  constructor(private postService: PostDetailsService, private profileService: ProfileService) {
     this.commentEditing = false;
     this.commentDeleting = false;
     this.editCommentForm = new FormGroup({
@@ -24,6 +26,11 @@ export class CommentComponent implements OnInit {
       file: new FormControl(null),
     });
     this.refresh = new EventEmitter<any>();
+    this.editable = false;
+  }
+
+  ngOnInit() {
+    this.profileService.getCurrentUser().subscribe((res) => (this.editable = this.comment.owner.id === res.id));
   }
 
   get content() {
@@ -37,9 +44,6 @@ export class CommentComponent implements OnInit {
     }
     fd.append('content', this.content.value);
     return fd;
-  }
-
-  ngOnInit() {
   }
 
   editToggle() {

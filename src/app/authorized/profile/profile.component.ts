@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { throwError } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
-import config, { default as configData } from 'src/app/core/config.js';
+import { throwError } from 'rxjs';
+import { default as configData } from 'src/app/core/config.js';
 import { IUserData } from '../../core/interfaces/user.interfaces';
 import { equalityValidator } from '../../homepage/register/equality.validator';
 import { ProfileService } from './profile.service';
@@ -40,7 +40,7 @@ export class ProfileComponent {
     this.lastNameField = false;
     this.emailField = false;
     this.passwordChange = false;
-    this.profileService.getCurrentUser().subscribe((res) => (this.editable = res.id === this.userID ? true : false));
+    this.profileService.getCurrentUser().subscribe((res) => (this.editable = res.id === this.userID));
   }
 
   get password(): AbstractControl {

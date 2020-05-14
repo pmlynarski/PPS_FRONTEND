@@ -1,12 +1,11 @@
 <div class="container">
   <div *ngIf="!commentEditing; else form" class="comment__wrapper">
-    <div class="icons__wrapper">
+    <div *ngIf="editable" class="icons__wrapper">
       <img (click)="editToggle()" alt="edit" class="icon" src="../../../assets/img/editIcon.svg"/>
       <img (click)="toggleDeletePopup()" alt="edit" class="icon" src="../../../assets/img/deleteIcon.svg"/>
     </div>
     <div class="comment__user">
-      <img [routerLink]="['/home/profile/' + comment.owner.id]" [src]="'http://127.0.0.1:8000' + comment.owner.image"
-           alt="profile image"/>
+      <img [routerLink]="['/home/profile/' + comment.owner.id]" [src]="comment.owner.image" alt="profile image"/>
       <div class="comment__date">{{ comment.date_commented | date: 'dd MMM yyyy HH:mm' }}</div>
     </div>
     <div class="comment__credentials">
@@ -19,7 +18,7 @@
       </div>
       <div class="comment__files">
         <div *ngIf="comment.file" class="comment__file">
-          <img [src]="'http://127.0.0.1:8000' + comment.file" alt="profile image"/>
+          <img [src]="comment.file" alt="profile image"/>
         </div>
       </div>
     </div>

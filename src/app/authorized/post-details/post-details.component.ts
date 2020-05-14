@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { IComment } from '../../core/interfaces/comment.interfaces';
 import { IPost } from '../../core/interfaces/posts.interfaces';
+import { ProfileService } from '../profile/profile.service';
 import { PostDetailsService } from './post-details.service';
 
 @Component({
@@ -22,20 +23,27 @@ export class PostDetailsComponent implements OnInit {
   postImage: File;
   postEditing: boolean;
   postDeleting: boolean;
+  editable: boolean;
 
-  constructor(private postDetailsServer: PostDetailsService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    private postDetailsServer: PostDetailsService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private profileService: ProfileService,
+  ) {
     this.postEditing = false;
     this.postDeleting = false;
     this.postID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.postDetails(this.postID);
     this.commentForm = new FormGroup({
       content: new FormControl('', Validators.required),
     });
+    this.postDetails(this.postID);
     this.editPostForm = new FormGroup({
       content: new FormControl('', Validators.required),
       file: new FormControl(null),
       image: new FormControl(null),
     });
+    this.editable = false;
   }
 
   ngOnInit() {}
@@ -112,6 +120,8 @@ export class PostDetailsComponent implements OnInit {
       (response) => {
         this.post = response.body.post;
         this.comments = response.body.comments;
+        this.profileService.getCurrentUser().subscribe((res) => (this.editable = this.post.owner.id === res.id));
+        this.postContent.setValue(this.post.content);
       },
       () => {
         this.comments = [];

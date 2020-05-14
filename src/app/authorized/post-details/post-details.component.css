@@ -2,7 +2,7 @@
   background-color: white;
   width: 100%;
   min-height: 100vh;
-  color: rgb(94, 0, 138);
+  color: #000;
   display: flex;
   flex-direction: column;
   padding: 35px 15px;
@@ -110,9 +110,20 @@ form {
   flex-direction: column;
 }
 
-.comment__form textarea {
+.comment__form {
+  width: 100%;
+  color: #000;
+}
+
+label {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+textarea {
   height: 150px;
-  width: 90%;
+  width: 100%;
   border-radius: 25px;
   padding: 15px;
   resize: none;
@@ -120,11 +131,11 @@ form {
 
 .bottom__form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 5px 10px;
-  width: 90%;
+  width: 100%;
 }
 
 .add-comment__button {
@@ -136,7 +147,7 @@ form {
   padding: 5px;
   border-radius: 25px;
   font-size: 11px;
-  margin: 0;
+  margin: 10px 0;
 }
 
 .add-comment__button:hover {
@@ -147,8 +158,8 @@ form {
 
 .icons__wrapper {
   position: absolute;
-  top: -5px;
-  right: 8px;
+  bottom: 0;
+  left: 0;
 }
 
 .icon {
@@ -181,8 +192,7 @@ button:hover {
   margin-bottom: 10px;
 }
 
-label,
-button {
+label {
   margin: 5px auto 5px 0;
 }
 
@@ -213,6 +223,7 @@ button {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin: 0;
 }
 
 @media only screen and (min-width: 768px) {
