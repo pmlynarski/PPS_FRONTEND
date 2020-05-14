@@ -11,7 +11,8 @@
       </span>
       <div class="post__user">
         <span>{{ post.owner.first_name }} {{ post.owner.last_name }}</span>
-        <img [src]="'http://127.0.0.1:8000' + post.owner.image" [routerLink]="['/home/profile/' + post.owner.id]" />
+        <img [routerLink]="['/home/profile/' + post.owner.id]" [src]="'http://127.0.0.1:8000' + post.owner.image"
+             alt="profile image"/>
       </div>
     </div>
   </div>
@@ -21,14 +22,16 @@
     </div>
     <div class="post__files">
       <div class="post__image" *ngIf="post.image">
-        <img [src]="'http://127.0.0.1:8000' + post.image" />
+        <img [src]="'http://127.0.0.1:8000' + post.image" alt="profile image"/>
       </div>
     </div>
   </div>
 
   <ng-template #form>
     <form class="form-group" (ngSubmit)="submitPostEdit()" [formGroup]="editPostForm">
+      <label>
         <textarea class="form-group__input" formControlName="content"></textarea>
+      </label>
       <label>
         File:
         <input type="file" (change)="postFileChange($event)" formControlName="file" />
@@ -54,31 +57,18 @@
   <div class="post__comments">
     <div class="comment__form">
       <form [formGroup]="commentForm" (ngSubmit)="addComment()">
-        <textarea class="textarea" formControlName="content"></textarea>
+        <label>
+          <textarea class="textarea" formControlName="content"></textarea>
+        </label>
         <div class="bottom__form">
-          <input type="file" class="load-file" accept="image/*" style="color: white;" (change)="onFileSelected($event)" />
+          <input (change)="onFileSelected($event)" accept="image/*" class="load-file" style="color: white;"
+                 type="file"/>
           <button type="submit" class="add-comment__button">Add comment</button>
         </div>
       </form>
     </div>
     <div class="comment" *ngFor="let comment of comments">
-      <div class="comment__user">
-        <img [src]="'http://127.0.0.1:8000' + comment.owner.image" />
-        <div class="comment__date">{{ comment.date_commented | date: 'dd-MMM-yyyy hh-mm-ss' }}</div>
-      </div>
-      <div class="comment__credentials">
-        <div class="comment__header">
-          <span>{{ comment.owner.first_name }} {{ comment.owner.last_name }}</span>
-        </div>
-        <div class="comment__content">
-          {{ comment.content }}
-        </div>
-        <div class="comment__files">
-          <div class="comment__file" *ngIf="comment.file">
-            <img [src]="'http://127.0.0.1:8000' + comment.file" />
-          </div>
-        </div>
-      </div>
+      <app-comment (refresh)="postDetails(postID)" [comment]="comment"></app-comment>
     </div>
   </div>
 </div>

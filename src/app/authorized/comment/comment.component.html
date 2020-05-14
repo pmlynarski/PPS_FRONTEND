@@ -1,0 +1,52 @@
+<div class="container">
+  <div *ngIf="!commentEditing; else form" class="comment__wrapper">
+    <div class="icons__wrapper">
+      <img (click)="editToggle()" alt="edit" class="icon" src="../../../assets/img/editIcon.svg"/>
+      <img (click)="toggleDeletePopup()" alt="edit" class="icon" src="../../../assets/img/deleteIcon.svg"/>
+    </div>
+    <div class="comment__user">
+      <img [routerLink]="['/home/profile/' + comment.owner.id]" [src]="'http://127.0.0.1:8000' + comment.owner.image"
+           alt="profile image"/>
+      <div class="comment__date">{{ comment.date_commented | date: 'dd MMM yyyy HH:mm' }}</div>
+    </div>
+    <div class="comment__credentials">
+      <div class="comment__header">
+        <span
+          [routerLink]="['/home/profile/' + comment.owner.id]">{{ comment.owner.first_name }} {{ comment.owner.last_name }}</span>
+      </div>
+      <div class="comment__content">
+        {{ comment.content }}
+      </div>
+      <div class="comment__files">
+        <div *ngIf="comment.file" class="comment__file">
+          <img [src]="'http://127.0.0.1:8000' + comment.file" alt="profile image"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #form>
+    <form (ngSubmit)="submitPostEdit()" [formGroup]="editCommentForm" class="form-group">
+      <label>
+        <textarea class="form-group__input" formControlName="content"></textarea>
+      </label>
+      <label>
+        <p>Image:</p>
+        <input (change)="commentFileChange($event)" accept="image/*" formControlName="file" type="file"/>
+      </label>
+      <div class="button__wrapper">
+        <button type="submit">Save</button>
+        <button (click)="editToggle()" class="cancel" type="reset">Cancel</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <div *ngIf="commentDeleting" class="confirmation">
+    <div class="caption__wrapper">
+      Are you sure about deleting this comment?
+    </div>
+    <div class="button__wrapper">
+      <button (click)="deletePost()" class="approve">yes</button>
+      <button (click)="toggleDeletePopup()" class="decline">no</button>
+    </div>
+  </div>
+</div>

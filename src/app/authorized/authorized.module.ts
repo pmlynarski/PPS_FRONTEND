@@ -11,6 +11,7 @@ import { routing } from './authorized-routing.module';
 import { AuthorizedComponent } from './authorized.component';
 import { ChatAppComponent } from './chat-app/chat-app.component';
 import { ChatAppService } from './chat-app/chat-app.service';
+import { CommentComponent } from './comment/comment.component';
 import { AddGroupComponent } from './groups/add-group/add-group.component';
 import { ForeignGroupComponent } from './groups/foreign-group/foreign-group.component';
 import { ForeignGroupService } from './groups/foreign-group/foreign-group.service';
@@ -28,7 +29,6 @@ import { SearchComponent } from './search/search.component';
 import { SearchService } from './search/search.service';
 
 
-
 @NgModule({
   declarations: [
     AllPostsComponent,
@@ -44,6 +44,7 @@ import { SearchService } from './search/search.service';
     PendingListComponent,
     PostDetailsComponent,
     ChatAppComponent,
+    CommentComponent,
   ],
   imports: [CommonModule, RouterModule, routing, FormsModule, ReactiveFormsModule],
   exports: [AuthorizedComponent],

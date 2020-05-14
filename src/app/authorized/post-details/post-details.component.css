@@ -96,79 +96,11 @@
   background-color: white;
   margin-bottom: 15px;
   padding: 10px;
-  position: relative;
   width: 100%;
   color: rgb(94, 0, 138);
   box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
-  display: flex;
-  flex-direction: row;
   border-radius: 25px;
   border: 1px solid rgba(94, 0, 138, 0.1);
-}
-
-.comment__user {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 20%;
-}
-
-.comment__user img {
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-}
-
-.comment__user span {
-  font-size: 12px;
-  color: rgb(46, 46, 46);
-}
-
-.comment__credentials {
-  width: 80%;
-  padding: 0 10px;
-}
-
-.comment__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.comment__header span {
-  cursor: pointer;
-}
-
-.comment__date {
-  font-size: 9px;
-  color: rgb(46, 46, 46);
-}
-
-.comment__content {
-  padding: 5px 0;
-  color: rgb(46, 46, 46);
-  height: 60px;
-  cursor: pointer;
-}
-
-.comment__form {
-  height: 220px;
-  width: 100vw;
-}
-.comment__files {
-  height: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-.comment__file img {
-  height: 50px;
-  width: 50px;
-  margin-left: 10px;
 }
 
 form {
@@ -190,6 +122,7 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 5px 10px;
   width: 90%;
 }
@@ -203,6 +136,7 @@ form {
   padding: 5px;
   border-radius: 25px;
   font-size: 11px;
+  margin: 0;
 }
 
 .add-comment__button:hover {
@@ -247,7 +181,8 @@ button:hover {
   margin-bottom: 10px;
 }
 
-label, button {
+label,
+button {
   margin: 5px auto 5px 0;
 }
 
@@ -293,6 +228,7 @@ label, button {
     height: 100px;
     border-radius: 100px;
     border: 3px solid white;
+    cursor: pointer;
   }
 
   .post__user span {
@@ -313,7 +249,7 @@ label, button {
     color: rgb(94, 0, 138);
     border: 1px rgb(94, 0, 138) solid;
     box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
-    height: 55px;
+    height: 35px;
     width: 100px;
     padding: 5px;
     border-radius: 25px;
