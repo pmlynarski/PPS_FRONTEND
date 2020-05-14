@@ -11,7 +11,7 @@
 
 .header,
 .sub-header {
-  color: #000;
+  color: #fff;
 }
 
 .header {
@@ -61,7 +61,6 @@
   padding: 15px;
   border-radius: 15px;
   text-align: center;
-  background-color: #dbdbdb;
 }
 
 .profile__wrapper {
