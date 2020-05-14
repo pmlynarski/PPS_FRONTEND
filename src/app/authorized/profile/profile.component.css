@@ -95,7 +95,7 @@
 }
 
 .profile__button {
-  border-radius: 0 15px 15px 0;
+  border-radius: 15px;
   height: 30px;
   margin-left: 5px;
   padding: 5px;
@@ -206,10 +206,6 @@ input::-webkit-file-upload-button {
   }
 
   .profile__button {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 15px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 15px;
     height: 35px;
     margin-left: 5px;
     font-size: 20px;

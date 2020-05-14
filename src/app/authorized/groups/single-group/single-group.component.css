@@ -177,17 +177,6 @@ form{
   border:1px solid  rgb(94, 0, 138);
 }
 
-.profile__button {
-  border-radius: 0 15px 15px 0;
-  height: 30px;
-  margin-left: 5px;
-  padding: 5px;
-  background-color: white;
-  border: 1px solid rgb(94, 0, 138);
-  cursor: pointer;
-}
-
-
 .add-post__button {
   background-color: white;
   color: rgb(94, 0, 138);

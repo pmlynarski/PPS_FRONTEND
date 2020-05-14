@@ -33,5 +33,6 @@
     margin: 0 auto;
     width: 60%;
     background-image: url('../../../assets/img/tło2.png');
+    min-height: calc(100vh - 60px);
   }
 }

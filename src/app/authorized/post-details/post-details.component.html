@@ -59,7 +59,7 @@
 
   <div class="post__comments">
     <div class="comment__form">
-      <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+      <form (ngSubmit)="addComment()" [formGroup]="commentForm" class="comment__form-group">
         <label>
           <textarea class="textarea" formControlName="content"></textarea>
         </label>

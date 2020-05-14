@@ -81,8 +81,7 @@ export class PostDetailsComponent implements OnInit {
     this.postDetailsServer.editPost(this.post.id, this.postData).subscribe(
       () => {
         this.postEditing = false;
-        this.post.content = this.postContent.value;
-        this.post.file = this.postFile;
+        this.postDetails(this.postID);
       },
       (error) => throwError(error),
     );

@@ -27,6 +27,6 @@
       </div>
     </div>
   </div>
-  <app-add-group *ngIf="newGroupFormVisible" (setHidden)="showNewGroupForm(false)"></app-add-group>
+  <app-add-group (refresh)="loadGroups()" (setHidden)="showNewGroupForm()" *ngIf="newGroupFormVisible"></app-add-group>
 </div>
 

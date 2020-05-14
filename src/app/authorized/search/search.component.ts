@@ -14,7 +14,9 @@ export class SearchComponent {
   private nextUrl: string;
   private message: string;
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService) {
+    this.search();
+  }
 
   search() {
     this.searchService.getResults(this.value).subscribe(

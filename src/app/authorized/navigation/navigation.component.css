@@ -135,7 +135,6 @@
         color: white;
         display: flex;
         justify-content: space-around;
-        font-size: 25px;
         width: 60%;
         height: 60px;
         left: 0;
@@ -153,9 +152,9 @@
     }
 
     .nav__item:hover{
-        background-color: white;
-        color: rgb(94, 0, 138, 1);
-        cursor: pointer;
+      background-color: white;
+      color: rgb(94, 0, 138);
+      cursor: pointer;
     }
-  
-  }
+
+}

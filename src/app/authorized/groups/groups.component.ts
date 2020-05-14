@@ -8,12 +8,19 @@ import { GroupsService } from './groups.service';
   styleUrls: ['./groups.component.css'],
 })
 export class GroupsComponent {
-  private message: string;
-  private groups: IGroupFull[];
+  message: string;
+  groups: IGroupFull[];
   newGroupFormVisible: boolean;
 
-
   constructor(private groupsService: GroupsService) {
+    this.loadGroups();
+  }
+
+  showNewGroupForm() {
+    this.newGroupFormVisible = !this.newGroupFormVisible;
+  }
+
+  loadGroups() {
     this.groupsService.getUsersGroups().subscribe(
       (response: any) => {
         this.message = undefined;
@@ -23,9 +30,5 @@ export class GroupsComponent {
         this.message = error.error.message;
       },
     );
-  }
-
-  showNewGroupForm() {
-    this.newGroupFormVisible = !this.newGroupFormVisible;
   }
 }
