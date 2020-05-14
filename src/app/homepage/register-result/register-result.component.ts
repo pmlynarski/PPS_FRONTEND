@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class RegisterResultComponent {
   @Output() hideRegisterInfo: EventEmitter<boolean>;
-  
+
   constructor() {
     this.hideRegisterInfo = new EventEmitter<boolean>();
 

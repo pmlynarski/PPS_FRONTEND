@@ -1,278 +1,286 @@
 .container {
-    background-color: white;
-    width: 100%;
-    min-height: 100vh;
-    color: rgb(94, 0, 138);
-    display: flex;
-    flex-direction: column;
-    padding: 35px 15px;
-    background-image: url("../../../assets/img/tło3.png");
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0 auto;
+  background-color: white;
+  width: 100%;
+  min-height: 100vh;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  padding: 35px 15px;
+  background-image: url('../../../assets/img/tło3.png');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.post__user {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.post__user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  border: 3px solid white;
+}
+
+.post__user span {
+  font-size: 12px;
+  color: rgb(46, 46, 46);
+  margin-left: 15px;
+}
+
+.post__credentials {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post__group {
+  cursor: pointer;
+}
+
+.post__date {
+  font-size: 15px;
+  color: rgb(46, 46, 46);
+}
+
+.post__content {
+  color: rgb(46, 46, 46);
+  min-height: 250px;
+  border-radius: 25px;
+  background-color: white;
+  margin-bottom: 15px;
+  border: 1px solid rgb(94, 0, 138);
+  padding: 10px;
+  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.post__content__text {
+  height: 60%;
+  width: 100%;
+}
+
+.post__files {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.post__image img {
+  width: 100px;
+  height: 100px;
+}
+.post__comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment {
+  background-color: white;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  color: rgb(94, 0, 138);
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
+  border-radius: 25px;
+  border: 1px solid rgba(94, 0, 138, 0.1);
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comment__form {
+  width: 100%;
+  color: #000;
+}
+
+label {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.comment__form-group label {
+  text-align: center;
+}
+
+textarea {
+  height: 150px;
+  width: 100%;
+  border-radius: 25px;
+  padding: 15px;
+  resize: none;
+}
+
+.bottom__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.add-comment__button {
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px rgb(94, 0, 138) solid;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
+  height: 35px;
+  padding: 5px;
+  border-radius: 25px;
+  font-size: 11px;
+  margin: 10px 0;
+}
+
+.add-comment__button:hover {
+  color: white;
+  background-color: rgb(94, 0, 138);
+  cursor: pointer;
+}
+
+.icons__wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.icon {
+  margin: 0 3px;
+  height: 21px;
+  width: 24px;
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+button {
+  background-color: white;
+  color: rgb(94, 0, 138);
+  border: 1px rgb(94, 0, 138) solid;
+  box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
+  height: 35px;
+  width: 65px;
+  border-radius: 15px;
+  font-size: 13px;
+}
+
+button:hover {
+  color: white;
+  background-color: rgb(94, 0, 138);
+  cursor: pointer;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  margin: 5px auto 5px 0;
+}
+
+.form-group__input {
+  min-height: 80px;
+  resize: none;
+  width: 100%;
+}
+
+.confirmation {
+  padding: 10px;
+  width: 300px;
+  height: 200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 0 15px rgba(94, 0, 138, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.button__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 60%;
+    font-size: 20px;
+    background-image: url('../../../assets/img/tło2.png');
+    min-height: calc(100vh - 60px);
   }
 
-  .header{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px;
-  }
-  
-  .post__user{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .post__user img{
-    width: 50px;
-    height: 50px;
-    border-radius: 100px;
-    border: 3px solid white;
-  }
-  
-  .post__user span{
-    font-size: 12px;
-    color: rgb(46, 46, 46);
-    margin-left: 15px;
-  
-  }
-  
-  .post__credentials{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .post__group{
-    cursor: pointer;
-  }
-  
-  .post__date {
-    font-size: 15px;
-    color: rgb(46, 46, 46);
-  
-  }
-  
-  .post__content {
-    color: rgb(46, 46, 46);
-    height: 250px;
-    border-radius: 25px;
-    background-color: white;
-    margin-bottom: 15px;
-    border: 1px solid rgb(94, 0, 138);
-    padding: 10px;
-    word-break: break-all;
-  }
-
-  .post__content__text{
-    height: 60%;
-    width: 100%;
-  }
-
-  .post__files{
-    height: 40%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .post__image img{
+  .post__user img {
     width: 100px;
     height: 100px;
-  }
-  .post__comments{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .comment {
-    background-color: white;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    padding: 10px;
-    position: relative;
-    width: 100%;
-    color: rgb(94, 0, 138);
-    box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
-    display: flex;
-    flex-direction: row;
-    border-radius: 25px;
-    border: 1px solid rgba(94, 0, 138, .1);
-  }
-  
-  .comment__user{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 20%;
-  }
-  
-  .comment__user img{
-    width: 50px;
-    height: 50px;
     border-radius: 100px;
-  }
-  
-  .comment__user span{
-    font-size: 12px;
-    color: rgb(46, 46, 46);
-  
-  }
-  
-  .comment__credentials{
-    width: 80%;
-    padding: 0 10px;
-  }
-  
-  .comment__header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .comment__header span{
+    border: 3px solid white;
     cursor: pointer;
   }
-  
-  .comment__date {
-    font-size: 9px;
+
+  .post__user span {
+    font-size: 20px;
     color: rgb(46, 46, 46);
-  
-  }
-  
-  .comment__content {
-    padding: 5px 0;
-    color: rgb(46, 46, 46);
-    height: 60px;
-    cursor: pointer;
+    margin-left: 15px;
   }
 
   .comment__form {
-    height: 220px;
-    width: 100vw;
+    width: 60vw;
   }
-  .comment__files{
-    height: 30px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
-
-  .comment__file img{
-    height: 50px;
-    width: 50px;
-    margin-left: 10px;
-  }
-
-  form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .comment__form textarea{
-    height: 150px;
-    width: 90%;
-    border-radius: 25px;
-    padding: 15px;
-    resize: none;
-  }
-
-  .bottom__form{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 5px 10px;
+  .comment__form textarea {
     width: 90%;
   }
 
-  .add-comment__button{
+  .add-comment__button {
     background-color: white;
     color: rgb(94, 0, 138);
     border: 1px rgb(94, 0, 138) solid;
-    box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
+    box-shadow: 10px 10px 10px rgba(94, 0, 138, 0.2);
     height: 35px;
-    padding: 5px;
-    border-radius: 25px;
-    font-size: 11px;
-  }
-
-  .add-comment__button:hover{
-    color: white;
-    background-color: rgb(94, 0, 138);
-    cursor: pointer;
-  }
-
-  @media only screen and (min-width: 768px) {
-    .container {
-        width: 60%;
-        font-size: 20px;
-        background-image: url("../../../assets/img/tło2.png");
-        min-height: calc(100vh - 60px);
-    }
-
-    .post__user img {
-      width: 100px;
-      height: 100px;
-      border-radius: 100px;
-      border: 3px solid white;
-    }
-    
-    .post__user span {
-      font-size: 20px;
-      color: rgb(46, 46, 46);
-      margin-left: 15px;
-    
-    }
-
-    .comment__form {
-      width: 60vw;
-    }
-    .comment__form textarea{
-      width: 90%;
-
-    }
-
-
-
-
-  .add-comment__button{
-    background-color: white;
-    color: rgb(94, 0, 138);
-    border: 1px rgb(94, 0, 138) solid;
-    box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
-    height: 55px;
     width: 100px;
     padding: 5px;
     border-radius: 25px;
     font-size: 13px;
   }
 
-  .add-comment__button:hover{
+  .add-comment__button:hover {
     color: white;
     background-color: rgb(94, 0, 138);
     cursor: pointer;
   }
 
+  .bottom__form {
+    width: 90%;
+    margin: 0 auto;
   }
-  
-
-  
-  
-  
-  
-  
-  
-  
+}

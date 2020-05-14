@@ -15,7 +15,7 @@ export class SingleGroupService {
   getGropuMembers: any = (id: number) => {
     const url = urlData.host + `groups/${id}/members/`;
     return this.http.post(url, {});
-  } 
+  }
 
   getGroupData(id: number): Observable<IGroupFull> {
     const url = urlData.host + `groups/${id}/`;

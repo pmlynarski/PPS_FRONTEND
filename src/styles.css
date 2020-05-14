@@ -67,9 +67,17 @@ ul {
 }
 
 .text--strong {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .text--link {
+  cursor: pointer;
+}
+
+textarea {
+  outline: none;
+}
+
+button {
   cursor: pointer;
 }

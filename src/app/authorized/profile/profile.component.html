@@ -1,18 +1,18 @@
 <div class="container" *ngIf="user">
     <div class="header">
       <div class="profile-image">
-        <img [src]="'http://127.0.0.1:8000' + user.image"> 
+        <img [src]="user.image">
         <div class="edit-image-button" (click)="showEditImage()" *ngIf="editable">
           <img src="../../../assets/img/upload.png"/>
         </div>
       </div>
-      <span>Hello <span class="text--strong">{{ user.first_name }}</span></span> 
+      <span>Hello <span class="text--strong">{{ user.first_name }}</span></span>
       <div class="message__icon">
         <img src="../../../assets/img/message-64.ico" [routerLink]="['chat']"/>
       </div>
     </div>
     <div class="sub-header">
-      <span>Feel free to edit your credentials.</span> <span>Simply click on them.</span>
+      <span>Feel free to edit your credentials. Simply click on them.</span>
     </div>
     <div class="edit-image" *ngIf="editImage">
       <div class="close-update">
