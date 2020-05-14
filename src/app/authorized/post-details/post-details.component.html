@@ -1,54 +1,77 @@
 <div class="container" *ngIf="post">
-    <div class="header">
-        <div class="post__date">{{post.date_posted | date: "dd-MMM-yyyy hh-mm-ss"}}</div>
-        <div class="post__credentials">
-            <span class="post__group" [routerLink]="['/home/group', post.group.id]">
-                {{post.group.name}}
-            </span>
-            <div class="post__user">
-                <span>{{post.owner.first_name}} {{post.owner.last_name}}</span>
-                <img [src]="'http://127.0.0.1:8000' + post.owner.image" [routerLink]="['/home/profile/' + post.owner.id]">
-            </div>
-        </div>
+  <div class="header">
+    <div class="post__date">{{ post.date_posted | date: 'dd MMM yyyy HH:mm' }}</div>
+    <div *ngIf="editable" class="icons__wrapper">
+      <img (click)="editToggle()" alt="edit" class="icon" src="../../../assets/img/editIcon.svg"/>
+      <img (click)="toggleDeletePopup()" alt="edit" class="icon" src="../../../assets/img/deleteIcon.svg"/>
     </div>
-    <div class="post__content">
-        <div class="post__content__text">
-            {{post.content}}
-        </div>
-        <div class="post__files">
-            <div class="post__image" *ngIf="post.image">
-                <img [src]="'http://127.0.0.1:8000' + post.image">
-            </div>
-        </div>
+    <div class="post__credentials">
+      <span class="post__group" [routerLink]="['/home/group', post.group.id]">
+        {{ post.group.name }}
+      </span>
+      <div class="post__user">
+        <span>{{ post.owner.first_name }} {{ post.owner.last_name }}</span>
+        <img [routerLink]="['/home/profile/' + post.owner.id]" [src]="post.owner.image"
+             alt="profile image"/>
+      </div>
     </div>
-   
-    <div class="post__comments">
-        <div class="comment__form">
-            <form [formGroup]="commentForm" (ngSubmit)="addComment()">
-              <textarea class="textarea" formControlName="content"></textarea>
-              <div class="bottom__form">
-                <input type='file' class="load-file" accept="image/*" style="color: white;" (change)="onFileSelected($event)">
-                <button type="submit" class="add-comment__button">Add comment</button>
-            </div>
-            </form>
-        </div>
-        <div  class="comment" *ngFor="let comment of comments">
-            <div class="comment__user">
-                <img [src]="'http://127.0.0.1:8000' + comment.owner.image">
-                <div class="comment__date">{{comment.date_commented | date: "dd-MMM-yyyy hh-mm-ss"}}</div>
-            </div>
-              <div class="comment__credentials">
-                <div class="comment__header">
-                  <span>{{comment.owner.first_name}} {{comment.owner.last_name}}</span>
-                </div>
-                <div class="comment__content">
-                    {{comment.content}}
-                </div>
-                <div class="comment__files">
-                    <div class="comment__file" *ngIf="comment.file">
-                        <img [src]="'http://127.0.0.1:8000' + comment.file">
-                    </div>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="post__content" *ngIf="!postEditing; else form">
+    <div class="post__content__text">
+      {{ post.content }}
     </div>
+    <div class="post__files">
+      <div class="post__image" *ngIf="post.image">
+        <img [src]="post.image" alt="profile image"/>
+      </div>
+      <div *ngIf="post.file" class="post__file">
+        <a [href]="post.file">Download attachment</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #form>
+    <form class="form-group" (ngSubmit)="submitPostEdit()" [formGroup]="editPostForm">
+      <label>
+        <textarea class="form-group__input" formControlName="content"></textarea>
+      </label>
+      <label>
+        File:
+        <input type="file" (change)="postFileChange($event)" formControlName="file" />
+      </label>
+      <label>
+        Image:
+        <input type="file" accept="image/*" (change)="postImageChange($event)" formControlName="image" />
+      </label>
+      <button type="submit">Save</button>
+    </form>
+  </ng-template>
+
+  <div *ngIf="postDeleting" class="confirmation">
+    <div class="caption__wrapper">
+      Are you sure about deleting this post?
+    </div>
+    <div class="button__wrapper">
+      <button class="approve" (click)="deletePost()">yes</button>
+      <button class="decline" (click)="toggleDeletePopup()">no</button>
+    </div>
+  </div>
+
+  <div class="post__comments">
+    <div class="comment__form">
+      <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+        <label>
+          <textarea class="textarea" formControlName="content"></textarea>
+        </label>
+        <div class="bottom__form">
+          <input (change)="onFileSelected($event)" accept="image/*" class="load-file"
+                 type="file"/>
+          <button type="submit" class="add-comment__button">Add comment</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment" *ngFor="let comment of comments">
+      <app-comment (refresh)="postDetails(postID)" [comment]="comment"></app-comment>
+    </div>
+  </div>
+</div>

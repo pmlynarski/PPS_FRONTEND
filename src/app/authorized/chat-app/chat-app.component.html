@@ -1,6 +1,6 @@
 <div class="container" *ngIf="receiver">
     <div class="messages__reciever">
-        <img [src]="'http://127.0.0.1:8000' + receiver.image" />
+        <img [src]="receiver.image"/>
         <span> {{receiver.first_name}} {{receiver.last_name}}</span>
     </div>
     <div class="messages">

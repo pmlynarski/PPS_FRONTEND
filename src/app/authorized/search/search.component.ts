@@ -21,7 +21,7 @@ export class SearchComponent {
       (response) => {
         this.message = undefined;
         this.results = [...response.results];
-        this.results = this.results.map(element => ({ ...element, membersCount: element.members.length }))
+        this.results = this.results.map(element => ({ ...element, membersCount: element.members.length }));
         this.nextUrl = response.next;
 
       },
