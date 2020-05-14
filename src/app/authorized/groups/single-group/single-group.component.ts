@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 
+import { IUserData } from 'src/app/core/interfaces/user.interfaces';
 import { IGroupFull } from '../../../core/interfaces/groups.interfaces';
 import { IPost } from '../../../core/interfaces/posts.interfaces';
 import { SingleGroupService } from './single-group.service';
-import { IUserData } from 'src/app/core/interfaces/user.interfaces';
 
 @Component({
   selector: 'app-single-group',
@@ -79,7 +79,7 @@ export class SingleGroupComponent implements OnInit {
     );
   }
 
-  showMembers(){
+  showMembers() {
     this.showGroupMembers = !this.showGroupMembers;
     this.singleGroupService.getGropuMembers(this.groupId).subscribe(
       (response) => {
@@ -88,7 +88,7 @@ export class SingleGroupComponent implements OnInit {
       () => {
 
       }
-    )
+    );
   }
 
   showAddImage() {
@@ -100,11 +100,11 @@ export class SingleGroupComponent implements OnInit {
   }
 
   onImageSelected(event) {
-    this.image = event.srcElement.files[0] as File;
+    this.image = event.target.files[0] as File;
   }
 
   onFileSelected(event) {
-    this.file = event.srcElement.files[0] as File;
+    this.file = event.target.files[0] as File;
   }
 
   get data() {

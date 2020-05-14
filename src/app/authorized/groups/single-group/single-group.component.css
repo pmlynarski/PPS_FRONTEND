@@ -177,20 +177,6 @@ form{
   border:1px solid  rgb(94, 0, 138);
 }
 
-.profile__button {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 15px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 15px;
-  height: 30px;
-  margin-left: 5px;
-  padding: 5px;
-  background-color: white;
-  border:1px solid  rgb(94, 0, 138);
-  cursor: pointer;
-}
-
-
 .add-post__button {
   background-color: white;
   color: rgb(94, 0, 138);
@@ -216,12 +202,12 @@ form{
   cursor: pointer;
 }
 
-.yes__button{
+.yes__button {
   background-color: white;
   color: rgb(94, 0, 138);
   border: 1px rgb(94, 0, 138) solid;
   width: 55px;
-  height: 55px;
+  height: 35px;
   box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
   cursor: pointer;
 }
@@ -239,11 +225,11 @@ form{
 
 }
 
-.cancel_button{
+.cancel_button {
   color: white;
   background-color: rgb(94, 0, 138);
   width: 55px;
-  height: 25px;
+  height: 35px;
   box-shadow: 10px 10px 10px rgba(94, 0, 138, .2);
   cursor: pointer;
 }
@@ -310,7 +296,7 @@ width: 100%;
     width: 50%;
     display: flex;
     flex-direction: column;
-  
+
   }
   .members_info{
     width: 50%;
@@ -329,5 +315,5 @@ width: 100%;
     cursor: pointer;
   }
 
-  
+
 }

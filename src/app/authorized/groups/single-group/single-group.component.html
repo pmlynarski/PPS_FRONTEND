@@ -32,8 +32,8 @@
             {{ group.name }}
           </span>
         </div>
-        <div class="group__members" (click) = "showMembers()">
-          <span class="members__label text--strong" >
+        <div (click)="showMembers()" class="group__members">
+          <span class="members__label text--strong">
             Members:
           </span>
           <span class="members__value">
@@ -49,15 +49,16 @@
           <span class="owner__value"> {{ group.owner.first_name }} {{ group.owner.last_name }} </span>
         </div>
         <div class="pending-members__link">
-          <span class="text--link text--strong" [routerLink]="['/home/group/' + groupId + '/pending']" *ngIf="isGroupOwner">
+          <span class="text--link text--strong" [routerLink]="['/home/group/' + groupId + '/pending']"
+                *ngIf="isGroupOwner">
             Pending members
           </span>
         </div>
-    </div>
+      </div>
     </div>
     <div class="group__all__members" *ngIf="showGroupMembers">
-      <span *ngFor="let member of groupMembers" [routerLink]="['/home/profile/' + member.id]" >
-        {{member.first_name}}   {{member.last_name}}
+      <span *ngFor="let member of groupMembers" [routerLink]="['/home/profile/' + member.id]">
+        {{ member.first_name }} {{ member.last_name }}
       </span>
     </div>
     <div class="post__form">
@@ -72,22 +73,20 @@
         </div>
       </form>
       <div class="add-image" *ngIf="addImage">
-        <div class="close-update">
-          <span (click)="showAddImage()"></span>
+        <div (click)="showAddImage()" class="close-update">
+          <span></span>
         </div>
         <div class="upload-content">
-          <input type="file" accept="image/*" (change)="onImageSelected($event)" class="inputfile" />
-          <button class="profile__button" (click)="showAddImage()">Save</button>
+          <input type="file" accept="image/*" (change)="onImageSelected($event)" class="inputfile"/>
           <span class="message--error"> {{ message }} </span>
         </div>
       </div>
       <div class="add-image" *ngIf="addFile">
-        <div class="close-update">
-          <span (click)="showAddFile()"></span>
+        <div (click)="showAddFile()" class="close-update">
+          <span></span>
         </div>
         <div class="upload-content">
-          <input type="file" (change)="onFileSelected($event)" class="inputfile" />
-          <button class="profile__button" (click)="showAddFile()">Save</button>
+          <input type="file" (change)="onFileSelected($event)" class="inputfile"/>
           <span class="message--error"> {{ message }} </span>
         </div>
       </div>

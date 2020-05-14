@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { throwError } from 'rxjs';
 
-import config, { default as configData } from 'src/app/core/config.js';
+import { ActivatedRoute } from '@angular/router';
+import { throwError } from 'rxjs';
+import { default as configData } from 'src/app/core/config.js';
 import { IUserData } from '../../core/interfaces/user.interfaces';
 import { equalityValidator } from '../../homepage/register/equality.validator';
 import { ProfileService } from './profile.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +27,6 @@ export class ProfileComponent {
   private userID: number;
   private editable: boolean;
 
-
   constructor(private profileService: ProfileService, private activatedRoute: ActivatedRoute) {
     this.editImage = false;
     this.userID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -41,7 +40,7 @@ export class ProfileComponent {
     this.lastNameField = false;
     this.emailField = false;
     this.passwordChange = false;
-    this.profileService.getCurrentUser().subscribe(res => this.editable = res.id === this.userID ? true : false);
+    this.profileService.getCurrentUser().subscribe((res) => (this.editable = res.id === this.userID));
   }
 
   get password(): AbstractControl {
@@ -59,10 +58,9 @@ export class ProfileComponent {
   }
 
   editFirstName(): void {
-    if( this.editable) {
+    if (this.editable) {
       this.firstNameField = !this.firstNameField;
     }
-    
   }
 
   sendFirstName(): void {
@@ -78,7 +76,7 @@ export class ProfileComponent {
   }
 
   editLastName(): void {
-    if( this.editable) {
+    if (this.editable) {
       this.lastNameField = !this.lastNameField;
     }
   }
@@ -96,7 +94,7 @@ export class ProfileComponent {
   }
 
   editEmail(): void {
-    if( this.editable) {
+    if (this.editable) {
       this.emailField = !this.emailField;
     }
   }
@@ -114,7 +112,7 @@ export class ProfileComponent {
   }
 
   passwordFormReveal(): void {
-    this.passwordChange =  !this.passwordChange;
+    this.passwordChange = !this.passwordChange;
   }
 
   submitPassword(): void {
@@ -129,20 +127,18 @@ export class ProfileComponent {
     );
   }
 
-  repairLinks = (images: string[]) => images.map(element => `${config.host}${element}`);
-
-  onFileSelected(event){
-    this.image = <File>event.srcElement.files[0];
+  onFileSelected(event) {
+    this.image = event.target.files[0] as File;
   }
 
   sendImage(): void {
-    const fd =  new FormData;
-    fd.append('image', this.image, this.image.name)
+    const fd = new FormData();
+    fd.append('image', this.image, this.image.name);
 
     this.profileService.sendUserData(fd).subscribe(
       (response) => {
         this.getUserCredentials();
-        this.showEditImage()
+        this.showEditImage();
       },
       (event) => {
         this.resultMessage = 'Something is wrong!';
@@ -150,8 +146,7 @@ export class ProfileComponent {
     );
   }
 
-  showEditImage(){
+  showEditImage() {
     this.editImage = !this.editImage;
   }
-
 }

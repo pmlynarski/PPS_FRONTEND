@@ -30,4 +30,13 @@ export class PostDetailsService {
   deletePost(postId: number) {
     return this.http.delete(this.deletePostUrl + postId + '/');
   }
+
+  editComment(postId: number, commentId: number, data) {
+    const url = urlData.host + `posts/post/${postId}/comment/${commentId}/edit/`;
+    return this.http.put(url, data);
+  }
+
+  deleteComment(postId: number, commentId: number) {
+    return this.http.delete(urlData.host + `posts/post/${postId}/comment/${commentId}/delete/`);
+  }
 }

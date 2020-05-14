@@ -8,4 +8,5 @@ export interface IPost {
   date_posted: string;
   group: IGroupSafe;
   file: any;
+  image: any;
 }

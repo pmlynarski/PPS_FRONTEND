@@ -3,7 +3,7 @@
     <span>{{ message }}</span>
   </div>
   <div class="pending-user__wrapper" *ngFor="let user of userList">
-    <img class="pending-user__image" alt="image" [src]="'http://127.0.0.1:8000' + user.image" />
+    <img [src]="user.image" alt="image" class="pending-user__image"/>
     <span>{{ user.first_name }} {{ user.last_name }} </span>
     <button class="button--confirm" (click)="accept(user.id)">
       Yes
