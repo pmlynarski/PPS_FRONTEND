@@ -24,7 +24,7 @@ export class SingleGroupComponent implements OnInit {
   private addImage: boolean;
   private addFile: boolean;
   private showGroupMembers: boolean;
-  private groupMembers: IUserData[];
+  groupMembers: IUserData[];
   image: File;
   file: File;
 
@@ -83,11 +83,11 @@ export class SingleGroupComponent implements OnInit {
     this.showGroupMembers = !this.showGroupMembers;
     this.singleGroupService.getGropuMembers(this.groupId).subscribe(
       (response) => {
+        console.log(response);
         this.groupMembers = response;
       },
       () => {
-
-      }
+      },
     );
   }
 
